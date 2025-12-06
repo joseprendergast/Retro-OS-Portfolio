@@ -39,11 +39,15 @@ export default function Taskbar() {
     <div
       className="fixed bottom-0 left-0 right-0 h-[30px] bg-[#c0c0c0] win95-raised flex items-center px-1 z-[9999]"
       data-testid="taskbar"
+      onClick={(e) => e.stopPropagation()}
     >
       {/* Start Button */}
       <Win95Button
         pressed={startMenuOpen}
-        onClick={toggleStartMenu}
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleStartMenu();
+        }}
         className="flex items-center gap-1 font-bold h-[22px]"
         data-testid="button-start"
       >

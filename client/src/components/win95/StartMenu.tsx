@@ -34,6 +34,7 @@ export default function StartMenu({ items, onItemClick }: StartMenuProps) {
     <div
       className="fixed bottom-[30px] left-0 win95-raised bg-[#c0c0c0] z-[9998] flex"
       data-testid="start-menu"
+      onClick={(e) => e.stopPropagation()}
     >
       {/* Windows 95 Side Banner */}
       <div className="w-[24px] bg-gradient-to-t from-[#000080] to-[#1084d0] flex items-end justify-center pb-2">

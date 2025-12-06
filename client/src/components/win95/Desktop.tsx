@@ -481,7 +481,7 @@ export default function Desktop() {
         return (
           <FileExplorer
             path={props.path}
-            items={props.items || props.files}
+            items={props.files}
             onNavigate={(newPath, newItems) => {
               const history = navigationHistory.get(win.id) || [];
               history.push({ path: props.path, items: props.files });
