@@ -16,12 +16,18 @@ import DisplaySettings from './DisplaySettings';
 import NewsletterDialog from './NewsletterDialog';
 import { useState } from 'react';
 
-import cloudsWallpaper from '@assets/generated_images/windows_95_clouds_wallpaper.png';
+import cloudsWallpaper from '@assets/stock_images/windows_95_blue_sky__82d519de.jpg';
 import crtImage from '@assets/generated_images/90s_crt_computer_setup.png';
 import floppyImage from '@assets/generated_images/colorful_floppy_disks_stack.png';
 import cdromImage from '@assets/generated_images/cd-rom_collection_scattered.png';
 import modemImage from '@assets/generated_images/dial-up_modem_device.png';
 import pixelArtImage from '@assets/generated_images/retro_pixel_art_scene.png';
+
+import starcraftImage from '@assets/stock_images/starcraft_video_game_faa55a3d.jpg';
+import redAlertImage from '@assets/stock_images/red_alert_military_t_ed9e3e3c.jpg';
+import simsImage from '@assets/stock_images/sims_life_simulation_7742b6a8.jpg';
+import ageOfEmpiresImage from '@assets/stock_images/age_of_empires_medie_e79e2e82.jpg';
+import finalFantasyImage from '@assets/stock_images/final_fantasy_fantas_de799221.jpg';
 
 const DESKTOP_ICONS = [
   { id: 'my-computer', label: 'My Computer', icon: '🖥️', component: 'MyComputer' },
@@ -79,7 +85,20 @@ const RECYCLE_BIN_FILES: FileItem[] = [
 const GAMES_FILES: FileItem[] = [
   { id: 'solitaire', name: 'Solitaire', icon: '🃏', type: 'file' },
   { id: 'minesweeper', name: 'Minesweeper', icon: '💣', type: 'file' },
+  { id: 'starcraft', name: 'Starcraft', icon: '🎮', type: 'file' },
+  { id: 'red-alert', name: 'Command & Conquer: Red Alert 2', icon: '🎮', type: 'file' },
+  { id: 'sims', name: 'The Sims', icon: '🎮', type: 'file' },
+  { id: 'age-of-empires', name: 'Age of Empires', icon: '🎮', type: 'file' },
+  { id: 'final-fantasy', name: 'Final Fantasy VII', icon: '🎮', type: 'file' },
 ];
+
+const GAME_IMAGES: Record<string, string> = {
+  'starcraft': starcraftImage,
+  'red-alert': redAlertImage,
+  'sims': simsImage,
+  'age-of-empires': ageOfEmpiresImage,
+  'final-fantasy': finalFantasyImage,
+};
 
 const NETWORK_FILES: FileItem[] = [
   { id: 'youtube-url', name: 'YouTube.url', icon: '📺', type: 'shortcut' },
@@ -429,6 +448,26 @@ export default function Desktop() {
     }
   };
 
+  const openGameImageWindow = (gameId: string, title: string) => {
+    if (GAME_IMAGES[gameId]) {
+      openWindow({
+        id: `game-${gameId}`,
+        title: `${title} - Game Info`,
+        icon: '🎮',
+        x: 120,
+        y: 60,
+        width: 500,
+        height: 400,
+        minWidth: 250,
+        minHeight: 200,
+        isMinimized: false,
+        isMaximized: false,
+        component: 'ImageViewer',
+        props: { src: GAME_IMAGES[gameId], title },
+      });
+    }
+  };
+
   const handleFileOpen = (file: FileItem, windowId: string) => {
     if (file.type === 'file') {
       if (file.id.startsWith('crt') || file.id.startsWith('floppy') || file.id.startsWith('cdrom') || file.id.startsWith('modem') || file.id.startsWith('pixel')) {
@@ -437,6 +476,8 @@ export default function Desktop() {
         openGameWindow('solitaire', 'Solitaire', '🃏');
       } else if (file.id === 'minesweeper') {
         openGameWindow('minesweeper', 'Minesweeper', '💣');
+      } else if (GAME_IMAGES[file.id]) {
+        openGameImageWindow(file.id, file.name);
       } else {
         openNotepadWindow(file.id, file.name);
       }
