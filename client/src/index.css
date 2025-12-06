@@ -2,51 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* LIGHT MODE */
+/* Windows 95 Theme */
 :root {
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
   --opaque-button-border-intensity: -8;
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
-  --background: 0 0% 98%;
-  --foreground: 0 0% 12%;
-  --border: 0 0% 88%;
-  --card: 0 0% 96%;
-  --card-foreground: 0 0% 12%;
-  --card-border: 0 0% 92%;
-  --sidebar: 0 0% 94%;
-  --sidebar-foreground: 0 0% 12%;
-  --sidebar-border: 0 0% 90%;
-  --sidebar-primary: 210 100% 45%;
-  --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 0 0% 88%;
-  --sidebar-accent-foreground: 0 0% 12%;
-  --sidebar-ring: 210 100% 45%;
-  --popover: 0 0% 92%;
-  --popover-foreground: 0 0% 12%;
-  --popover-border: 0 0% 88%;
-  --primary: 210 100% 45%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 86%;
-  --secondary-foreground: 0 0% 12%;
-  --muted: 0 3% 90%;
+  
+  /* Windows 95 Colors */
+  --win95-gray: #c0c0c0;
+  --win95-dark-gray: #808080;
+  --win95-light-gray: #dfdfdf;
+  --win95-white: #ffffff;
+  --win95-black: #000000;
+  --win95-teal: #008080;
+  --win95-navy: #000080;
+  --win95-title-start: #000080;
+  --win95-title-end: #1084d0;
+  --win95-inactive-start: #808080;
+  --win95-inactive-end: #c0c0c0;
+  
+  --background: 180 100% 25%;
+  --foreground: 0 0% 0%;
+  --border: 0 0% 75%;
+  --card: 0 0% 75%;
+  --card-foreground: 0 0% 0%;
+  --card-border: 0 0% 50%;
+  --sidebar: 0 0% 75%;
+  --sidebar-foreground: 0 0% 0%;
+  --sidebar-border: 0 0% 50%;
+  --sidebar-primary: 240 100% 25%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 0 0% 75%;
+  --sidebar-accent-foreground: 0 0% 0%;
+  --sidebar-ring: 240 100% 25%;
+  --popover: 0 0% 75%;
+  --popover-foreground: 0 0% 0%;
+  --popover-border: 0 0% 50%;
+  --primary: 240 100% 25%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 75%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 0 0% 87%;
   --muted-foreground: 0 0% 25%;
-  --accent: 210 8% 88%;
-  --accent-foreground: 0 0% 12%;
+  --accent: 0 0% 75%;
+  --accent-foreground: 0 0% 0%;
   --destructive: 0 84% 42%;
-  --destructive-foreground: 0 0% 98%;
-  --input: 0 0% 72%;
-  --ring: 210 100% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 0 0% 100%;
+  --ring: 240 100% 25%;
   --chart-1: 210 100% 35%;
   --chart-2: 180 85% 32%;
   --chart-3: 280 75% 38%;
   --chart-4: 30 85% 42%;
   --chart-5: 150 70% 35%;
-  --font-sans: Open Sans, sans-serif;
+  --font-sans: "MS Sans Serif", Arial, Segoe UI, sans-serif;
   --font-serif: Georgia, serif;
-  --font-mono: Menlo, monospace;
-  --radius: .5rem;
+  --font-mono: "Fixedsys", "Courier New", monospace;
+  --radius: 0rem;
   --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-sm: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
@@ -93,35 +107,35 @@
   --opaque-button-border-intensity: 9;
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
-  --background: 0 0% 8%;
-  --foreground: 0 0% 92%;
-  --border: 0 0% 18%;
-  --card: 0 0% 10%;
-  --card-foreground: 0 0% 92%;
-  --card-border: 0 0% 14%;
-  --sidebar: 0 0% 12%;
-  --sidebar-foreground: 0 0% 92%;
-  --sidebar-border: 0 0% 16%;
-  --sidebar-primary: 210 100% 50%;
-  --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 0 0% 16%;
-  --sidebar-accent-foreground: 0 0% 92%;
-  --sidebar-ring: 210 100% 50%;
-  --popover: 0 0% 14%;
-  --popover-foreground: 0 0% 92%;
-  --popover-border: 0 0% 18%;
-  --primary: 210 100% 50%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 18%;
-  --secondary-foreground: 0 0% 92%;
-  --muted: 0 3% 16%;
-  --muted-foreground: 0 0% 70%;
-  --accent: 210 8% 18%;
-  --accent-foreground: 0 0% 92%;
+  --background: 180 100% 20%;
+  --foreground: 0 0% 0%;
+  --border: 0 0% 60%;
+  --card: 0 0% 65%;
+  --card-foreground: 0 0% 0%;
+  --card-border: 0 0% 40%;
+  --sidebar: 0 0% 65%;
+  --sidebar-foreground: 0 0% 0%;
+  --sidebar-border: 0 0% 40%;
+  --sidebar-primary: 240 100% 25%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 0 0% 60%;
+  --sidebar-accent-foreground: 0 0% 0%;
+  --sidebar-ring: 240 100% 25%;
+  --popover: 0 0% 65%;
+  --popover-foreground: 0 0% 0%;
+  --popover-border: 0 0% 40%;
+  --primary: 240 100% 25%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 60%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 0 0% 75%;
+  --muted-foreground: 0 0% 25%;
+  --accent: 0 0% 60%;
+  --accent-foreground: 0 0% 0%;
   --destructive: 0 84% 45%;
-  --destructive-foreground: 0 0% 98%;
-  --input: 0 0% 28%;
-  --ring: 210 100% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 0 0% 100%;
+  --ring: 240 100% 25%;
   --chart-1: 210 100% 65%;
   --chart-2: 180 85% 62%;
   --chart-3: 280 75% 68%;
@@ -171,7 +185,123 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans bg-background text-foreground;
+    font-size: 11px;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+    image-rendering: pixelated;
+  }
+}
+
+/* Windows 95 3D Border Utilities */
+@layer utilities {
+  .win95-raised {
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-right-color: #000000;
+    border-bottom-color: #000000;
+    box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
+  }
+
+  .win95-sunken {
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #808080;
+    border-left-color: #808080;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    box-shadow: inset 1px 1px 0 #000000, inset -1px -1px 0 #dfdfdf;
+  }
+
+  .win95-button {
+    background-color: #c0c0c0;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-right-color: #000000;
+    border-bottom-color: #000000;
+    box-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #dfdfdf;
+    padding: 2px 8px;
+    min-width: 75px;
+    cursor: pointer;
+    font-family: "MS Sans Serif", Arial, sans-serif;
+    font-size: 11px;
+  }
+
+  .win95-button:active,
+  .win95-button-pressed {
+    border-top-color: #000000;
+    border-left-color: #000000;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #dfdfdf;
+    padding: 3px 7px 1px 9px;
+  }
+
+  .win95-title-active {
+    background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+    color: white;
+    font-weight: bold;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .win95-title-inactive {
+    background: linear-gradient(90deg, #808080 0%, #c0c0c0 100%);
+    color: #c0c0c0;
+    font-weight: bold;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .win95-menu-item:hover {
+    background-color: #000080;
+    color: white;
+  }
+
+  .win95-input {
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #808080;
+    border-left-color: #808080;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    box-shadow: inset 1px 1px 0 #000000;
+    padding: 2px 4px;
+  }
+
+  .win95-window {
+    background-color: #c0c0c0;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #dfdfdf;
+    border-left-color: #dfdfdf;
+    border-right-color: #000000;
+    border-bottom-color: #000000;
+    box-shadow: inset 1px 1px 0 #ffffff, 1px 1px 0 #000000;
+  }
+
+  .win95-well {
+    background-color: #c0c0c0;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #808080;
+    border-left-color: #808080;
+    border-right-color: #dfdfdf;
+    border-bottom-color: #dfdfdf;
+    box-shadow: inset 1px 1px 0 #000000;
+  }
+
+  .icon-shadow {
+    text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
   }
 }
 
