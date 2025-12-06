@@ -1,0 +1,885 @@
+# BUILD REQUEST: Windows 95 Retro OS Personal Website
+
+## Project Overview
+Create a fully interactive Windows 95-themed personal website that serves as both a portfolio and a nostalgic experience. The desktop features direct access to social links, games, media players, and personal content—all wrapped in authentic 90s UI.
+
+---
+
+## 🎯 THREE-PHASE DEVELOPMENT PLAN
+
+### Phase 1: Core Desktop & Essential Functionality (BUILD THIS FIRST)
+Foundation with working desktop, window system, games, and direct social links
+
+### Phase 2: Media Players & Enhanced Content  
+Add Windows Media Player, Winamp, RealPlayer, WinZip, Paint Shop Pro with 80s synthwave music
+
+### Phase 3: Polish, Easter Eggs & Advanced Features
+Add Ctrl+Alt+Del, BSOD, Clippy, achievements, screensaver, and 10+ easter eggs
+
+---
+
+# 🚀 BUILD PHASE 1 FIRST - DETAILED REQUIREMENTS
+
+## Desktop Layout Requirements
+
+### Desktop Icons (Left-to-Right, Top-to-Bottom Grid)
+
+**Row 1:**
+1. **My Computer** - Blue/gray computer icon
+2. **Internet Explorer** - Classic blue "e" with orbit ring
+3. **Recycle Bin** - Trash can icon (empty state)
+
+**Row 2:**
+4. **Photos** - Yellow folder icon
+5. **Games** - Folder with game controller graphic
+6. **Network** - Globe/computer network icon
+
+**Row 3:**
+7. **YouTube** - Custom YouTube icon with .url file indicator
+8. **LinkedIn** - LinkedIn "in" logo in 90s style with shortcut arrow
+9. **Newsletter** - Envelope/mail icon with shortcut arrow
+10. **Twitter** - Bird icon in retro pixel style with shortcut arrow
+
+### Icon Behavior
+- **Single-click**: Highlights/selects icon with blue background
+- **Double-click**: Opens application or folder
+- **Right-click**: Shows context menu (Open, Properties, Delete, etc.)
+- **Draggable**: Icons can be dragged around desktop with grid snapping
+- **Selection box**: Click-drag on empty desktop creates blue selection rectangle
+
+---
+
+## Taskbar Requirements
+
+### Layout (Bottom of screen, always visible)
+
+**Left Side:**
+- **Start Button** 
+  - Windows 95 logo
+  - Pressed state on hover/click
+  - Opens Start Menu
+
+**Center:**
+- **Open Window Buttons**
+  - Shows button for each open window
+  - Displays application icon + truncated title
+  - Pressed state for active window
+  - Click to focus or minimize window
+
+**Right Side (System Tray):**
+- **Clock Display**: Shows current time (HH:MM AM/PM format, updates every minute)
+- **Volume Icon**: Speaker icon (decorative for Phase 1)
+- **Network Icon**: Two monitors icon (decorative)
+
+**Styling:**
+- Gray background (#c0c0c0)
+- Raised border effect (3D beveled look)
+- Height: ~30px
+- Always on top (z-index)
+
+---
+
+## Start Menu Structure
+
+**Opens when Start button clicked, anchored to bottom-left**
+
+```
+START MENU (Pop-up from bottom-left)
+├── Programs >
+│   ├── Games >
+│   │   ├── Solitaire
+│   │   └── Minesweeper
+│   └── Internet Explorer
+├── Documents >
+│   ├── Resume.doc
+│   ├── About_Me.txt
+│   └── Projects >
+│       ├── Project_1
+│       ├── Project_2
+│       └── Project_3
+├── Settings >
+│   └── Display (change wallpaper)
+├── Find
+│   └── Files or Folders...
+├── Help
+│   └── Site Navigation Guide
+├── Run...
+└── Shut Down...
+```
+
+**Menu Behavior:**
+- Hover over items with ">" shows submenu to the right
+- Click item to open/execute
+- Click outside menu to close
+- Keyboard navigation (arrow keys, Enter)
+- Gray background with highlight on hover
+
+**Separator Lines:** Add visual separators before "Run..." and "Shut Down..."
+
+---
+
+## Window System Requirements
+
+### Window Components (All windows must have)
+
+**Title Bar:**
+- Application icon (left)
+- Window title text (centered or left-aligned)
+- Minimize button (underscore icon)
+- Maximize/Restore button (square icon)
+- Close button (X icon)
+- Gradient: Blue (active) or Gray (inactive)
+
+**Menu Bar:** (Below title bar)
+- File, Edit, View, Help menus
+- Can be functional or decorative based on app
+
+**Content Area:**
+- Scrollable if content exceeds window size
+- White or app-specific background
+
+**Status Bar:** (Bottom, optional)
+- Shows context info or instructions
+
+**Borders:**
+- Resizable borders on all sides
+- Corner resize handles (8-directional)
+- 3D raised border effect
+
+### Window Behaviors
+
+**Opening:**
+- Fade in + scale animation
+- Opens centered or cascaded if multiple windows
+- Comes to front (highest z-index)
+
+**Dragging:**
+- Click and drag title bar to move
+- Cursor changes to move cursor
+- Window drags smoothly with mouse
+
+**Resizing:**
+- Hover on borders/corners shows resize cursor
+- Click and drag to resize
+- Minimum size constraints (prevent too small)
+- Maximum size: screen minus taskbar
+
+**Minimizing:**
+- Animates shrinking to taskbar button
+- Window hidden but tracked
+
+**Maximizing:**
+- Expands to fill screen (minus taskbar)
+- Maximize button becomes Restore button
+- Borders removed when maximized
+
+**Closing:**
+- Scale down + fade out animation
+- Removed from taskbar
+- Confirm dialog for important actions
+
+**Focus Management:**
+- Click any part of window brings to front
+- Active window has blue title bar
+- Inactive windows have gray title bar
+- Only one active window at a time
+
+---
+
+## Desktop Application Details
+
+### 1. My Computer
+
+**Opens:** Windows Explorer-style window
+
+**Contents (Icon view):**
+```
+C:\ Drive
+├── My Documents (folder icon)
+│   ├── Resume.doc (Word doc icon)
+│   ├── About_Me.txt (Notepad icon)
+│   └── Projects (folder)
+│       ├── Project_1 (folder)
+│       ├── Project_2 (folder)
+│       └── Project_3 (folder)
+├── My Pictures (folder icon)
+└── My Music (folder icon - placeholder for Phase 2)
+```
+
+**Window Features:**
+- Address bar showing current path
+- Back/Forward navigation buttons
+- Icon view (grid of icons with labels)
+- Double-click folder to open new window or navigate
+- Menu bar: File, Edit, View, Help
+
+**Behavior:**
+- Resume.doc opens in Notepad-style viewer with formatted text
+- About_Me.txt opens in Notepad window
+- Projects folder contains subfolders for each portfolio project
+- Each project folder contains Description.txt and optional screenshot
+
+---
+
+### 2. Internet Explorer
+
+**Opens:** Browser-style window
+
+**Features:**
+- Address bar (decorative or functional)
+- Back, Forward, Refresh, Stop buttons
+- Favorites/Bookmarks sidebar (optional)
+- Content area displaying your blog/articles
+
+**Content:**
+- Blog posts or articles about your work
+- Can be embedded HTML or links to external blog
+- Simple layout with article titles, dates, summaries
+
+**Styling:**
+- Classic IE blue toolbar
+- Gray menu bar
+- White content area
+
+---
+
+### 3. Recycle Bin
+
+**Opens:** Windows Explorer-style window
+
+**Contents:** 
+- Shows "deleted" files (easter egg content)
+- Empty state: "Recycle Bin is empty" message
+- Fun placeholder files like:
+  - "old_resume_draft.doc"
+  - "cringe_photo.bmp"
+  - "test_file.txt"
+
+**Features:**
+- Empty Recycle Bin option (shows confirmation dialog)
+- Restore items (moves back to desktop)
+- Permanently delete option
+
+---
+
+### 4. Photos Folder
+
+**Opens:** Windows Explorer with thumbnail view
+
+**Contents: Nostalgic 90s Images**
+- CRT monitor and beige computer setup
+- Floppy disks (3.5" diskettes)
+- Stack of CD-ROMs
+- Dial-up modem
+- Old Windows 95 screenshots
+- Retro pixel art
+- Vintage tech advertisements (90s aesthetic)
+- "Under Construction" GIF
+- Geocities-style web graphics
+
+**View Options:**
+- Large Icons (thumbnail grid)
+- List view
+- Details view
+
+**Behavior:**
+- Double-click image opens in basic image viewer
+- Can open in Paint (Phase 1 simple version) or Paint Shop Pro (Phase 2)
+
+---
+
+### 5. Games Folder
+
+**Opens:** Folder window with two game icons
+
+**Contents:**
+1. **Solitaire (sol.exe)** - Card game icon
+2. **Minesweeper (winmine.exe)** - Mine icon with flag
+
+**Behavior:**
+- Double-click to launch game in new window
+
+---
+
+### 6. Solitaire (Fully Playable)
+
+**Window:** Classic Solitaire interface
+
+**Game Features:**
+- Standard Klondike Solitaire rules
+- Draw 1 or Draw 3 card option
+- 7 tableau piles, 4 foundation piles, stock pile
+- Drag and drop cards
+- Double-click to auto-move to foundation
+- Timer and score display
+- Move counter
+- Deal new game button
+- Undo button (optional)
+
+**Win Condition:**
+- All cards moved to foundation suits (Ace to King)
+- Cascading cards animation on win
+- "You Win!" dialog with score and time
+
+**Styling:**
+- Green felt background
+- Classic card designs
+- 3D card shadows
+
+---
+
+### 7. Minesweeper (Fully Playable)
+
+**Window:** Classic Minesweeper interface
+
+**Game Features:**
+- Three difficulty levels:
+  - Beginner: 8x8 grid, 10 mines
+  - Intermediate: 16x16 grid, 40 mines
+  - Expert: 30x16 grid, 99 mines
+- Click to reveal square
+- Right-click to place/remove flag
+- Numbers show adjacent mine count
+- Face button (top center):
+  - Smiley: normal
+  - Surprised: clicking
+  - Dead: hit mine
+  - Cool: won game
+- Timer (seconds elapsed)
+- Mine counter (remaining mines)
+
+**Game Mechanics:**
+- First click never hits mine
+- Chord clicking (click both buttons to reveal adjacent)
+- Auto-reveal empty areas (flood fill)
+
+**Win Condition:**
+- All non-mine squares revealed
+- "You Win!" dialog with time
+
+**Lose Condition:**
+- Click on mine
+- All mines revealed (red background on clicked mine)
+- Game over dialog
+
+**Styling:**
+- Gray squares with 3D raised/pressed effect
+- Classic mine and flag icons
+- Number colors: 1=blue, 2=green, 3=red, 4=dark blue, etc.
+
+---
+
+### 8. Network (Social Links Folder)
+
+**Opens:** Folder window with shortcuts
+
+**Contents:**
+- YouTube.url (with custom icon)
+- LinkedIn.url (with custom icon)
+- Twitter.url (with custom icon)
+- Newsletter.url (with custom icon)
+
+**Behavior:**
+- Double-click opens link in new browser tab
+- Shows loading dialog briefly ("Connecting to YouTube...")
+
+---
+
+### 9-12. Direct Desktop Shortcuts (YouTube, LinkedIn, Newsletter, Twitter)
+
+**Behavior:**
+- Double-click opens external link in new tab
+- Right-click shows "Open" and "Properties" options
+- Properties shows:
+  - Type: Internet Shortcut
+  - URL: [actual URL]
+  - Icon location
+
+**Visual:**
+- Each has custom icon matching platform
+- Small arrow overlay indicating shortcut
+- Label below icon
+
+**Newsletter Shortcut Specific:**
+- Opens modal/dialog for newsletter signup
+- Form fields: Name, Email
+- Submit button
+- "Thank you for subscribing!" confirmation
+
+---
+
+## Wallpaper System
+
+### Default Wallpaper
+Classic Windows 95 clouds (teal background with white clouds)
+
+### Additional Wallpapers (Selectable via Display Settings)
+1. Clouds (default)
+2. Teal geometric pattern
+3. Brick wall texture
+4. Blue circuit board
+5. Solid Teal
+
+### Display Settings Window
+
+**Access:** Start > Settings > Display
+
+**Window Contents:**
+- Preview area showing current wallpaper
+- Dropdown list of available wallpapers
+- "Apply" and "OK" buttons
+- Wallpaper position options:
+  - Tile
+  - Center
+  - Stretch
+
+**Behavior:**
+- Selecting wallpaper shows preview
+- Apply button changes desktop immediately
+- OK button saves and closes window
+- Selection persists via localStorage
+
+---
+
+## Visual Design Requirements
+
+### Color Palette (Authentic Windows 95)
+- **Desktop**: Teal (#008080) or wallpaper
+- **Window/Button Gray**: #c0c0c0
+- **Dark Gray**: #808080
+- **White**: #ffffff
+- **Black**: #000000
+- **Active Title Bar**: Gradient blue (#000080 to #1084d0)
+- **Inactive Title Bar**: Gradient gray (#808080 to #c0c0c0)
+- **Highlight Blue**: #000080
+
+### Typography
+- **System Font**: MS Sans Serif or equivalent (Arial, Segoe UI as fallbacks)
+- **Fixed Width**: Fixedsys or Courier New for system dialogs
+- **Icon Labels**: 8pt, white text with black shadow/outline
+- **Menu Text**: 8pt
+- **Title Bar**: 8pt bold
+
+### Border Styles (Critical for authenticity)
+- **Raised/Outset**: Light top-left, dark bottom-right (buttons, window borders)
+- **Sunken/Inset**: Dark top-left, light bottom-right (text inputs, content areas)
+- **Flat**: No 3D effect (some menu items)
+- **Border Width**: 2px typical
+- **Colors**: 
+  - Highlight: #ffffff
+  - Light: #dfdfdf
+  - Shadow: #808080
+  - Dark Shadow: #000000
+
+### Cursors
+- **Default**: Standard arrow
+- **Pointer**: Pointing hand (over links/buttons)
+- **Text**: I-beam (over text)
+- **Move**: Four-directional arrows (dragging windows)
+- **Resize**: Directional arrows (window borders)
+- **Wait**: Hourglass (loading states)
+
+### Icons Style
+- Pixelated 32x32 or 48x48
+- Limited color palette (256 colors max)
+- Slight perspective/3D effect
+- Classic Windows 95 aesthetic
+
+---
+
+## Interaction Details
+
+### Mouse Interactions
+- **Hover**: Highlight state (buttons, menu items, icons)
+- **Click**: Pressed state (buttons depress visually)
+- **Double-Click**: Opens items (icons, files)
+- **Right-Click**: Context menu
+- **Drag**: Move items, select multiple
+- **Drag Window**: Move windows by title bar
+- **Resize**: Drag window borders/corners
+
+### Keyboard Interactions (Phase 1 Basic)
+- **Alt + F4**: Close active window
+- **Enter**: Activate selected item
+- **Escape**: Close dialog/menu
+- **Tab**: Navigate between elements
+- **Arrow Keys**: Navigate Start Menu
+- **F5**: Refresh window
+
+### Dialog Boxes
+- **Confirm Dialogs**: "Are you sure?" with Yes/No/Cancel
+- **Alert Dialogs**: OK button only
+- **Input Dialogs**: Text field with OK/Cancel
+- **Always modal**: Blocks interaction with parent window
+- **Always centered**: On screen or parent window
+
+### Loading States
+- Hourglass cursor
+- "Please wait..." dialog (for longer operations)
+- Progress bars (horizontal, green/blue filling)
+
+---
+
+## Animation Requirements
+
+### Window Animations
+- **Open**: Fade in (0.2s) + scale from 0.9 to 1
+- **Close**: Fade out (0.15s) + scale to 0.95
+- **Minimize**: Shrink to taskbar button (0.3s)
+- **Maximize**: Expand to fullscreen (0.2s)
+- **Restore**: Return to previous size/position (0.2s)
+
+### Button Animations
+- **Hover**: Subtle highlight (instant)
+- **Press**: Sunken effect (instant)
+- **Release**: Return to normal (instant)
+
+### Menu Animations
+- **Open**: Slide down with fade (0.15s)
+- **Submenu**: Slide right with fade (0.15s)
+- **Close**: Fade out (0.1s)
+
+### Icon Animations
+- **Select**: Blue highlight background (instant)
+- **Drag**: Follow cursor with slight lag/smoothing
+
+### Keep animations subtle and fast - Windows 95 was snappy!
+
+---
+
+## Responsive Design Requirements
+
+### Desktop (Primary)
+- Minimum width: 1024px
+- Optimal: 1280px and above
+- Icons: Full size (48x48 or larger)
+- Taskbar: Full height (~30px)
+- Windows: Fully draggable and resizable
+
+### Tablet (1024px - 768px)
+- Slightly smaller icons
+- Touch-friendly hit targets (min 44x44px)
+- Simplified window interactions
+
+### Mobile (< 768px)
+- **Simplified Mode**:
+  - Taskbar becomes bottom navbar
+  - Start Menu becomes slide-out drawer
+  - Icons larger for touch (64x64)
+  - Windows open fullscreen (no drag/resize)
+  - Swipe between windows
+- **Landscape recommended**: Show notification on portrait mode
+- Desktop icons in 2-column grid
+
+### Touch Interactions (Tablet/Mobile)
+- Tap = Click
+- Long press = Right-click
+- Two-finger tap = Right-click (alternative)
+- Pinch-to-zoom disabled
+- Swipe up from taskbar = Show open windows
+
+---
+
+## Technical Requirements
+
+### Performance
+- Initial load: < 3 seconds
+- Window operations: < 100ms response time
+- Smooth 60fps animations
+- No layout shifts (CLS)
+- Lazy load off-screen content
+
+### Browser Support
+- Chrome/Edge (Chromium) - Primary
+- Firefox - Full support
+- Safari - Full support
+- Mobile browsers - Responsive version
+
+### Accessibility
+- Keyboard navigation functional
+- Focus indicators visible
+- Alt text for icons
+- Semantic HTML structure
+- ARIA labels where needed
+- Color contrast WCAG AA compliant
+
+### State Persistence (localStorage)
+- Window positions and sizes
+- Wallpaper selection
+- Open windows on page reload (optional)
+- Game high scores
+- Desktop icon arrangement
+
+### Code Quality
+- Clean, commented code
+- Component-based architecture
+- Reusable window component
+- Consistent naming conventions
+- Error handling for all interactions
+
+---
+
+## Content Requirements
+
+### Resume.doc Content
+```
+[Your Name]
+[Your Title/Role]
+[Contact Information]
+
+SUMMARY
+[2-3 sentence professional summary]
+
+EXPERIENCE
+[Company Name] - [Role] (Year - Year)
+• Achievement 1
+• Achievement 2
+
+[Company Name] - [Role] (Year - Year)
+• Achievement 1
+• Achievement 2
+
+EDUCATION
+[Degree] - [School] (Year)
+
+SKILLS
+[List relevant skills]
+```
+
+### About_Me.txt Content
+```
+About Me
+========
+
+Hi! I'm [Your Name].
+
+[3-4 paragraphs about you, your background, interests, and what you do]
+
+Fun Facts:
+- [Fact 1]
+- [Fact 2]
+- [Fact 3]
+
+Connect with me:
+YouTube: [URL]
+LinkedIn: [URL]
+Twitter: [URL]
+Newsletter: [URL]
+```
+
+### Projects Folder
+Each project folder should contain:
+
+**Project_[Name]/Description.txt**
+```
+Project: [Name]
+===================
+
+Overview:
+[2-3 sentences describing the project]
+
+Technologies Used:
+• [Tech 1]
+• [Tech 2]
+• [Tech 3]
+
+Key Features:
+• [Feature 1]
+• [Feature 2]
+
+Link: [Project URL if available]
+GitHub: [Repo URL if available]
+```
+
+### Help Content
+```
+Windows 95 Retro OS - Help Guide
+=================================
+
+NAVIGATION
+• Double-click icons to open
+• Drag windows by title bar to move
+• Click Start button for menu
+• Right-click for context menus
+
+KEYBOARD SHORTCUTS
+• Alt+F4: Close window
+• Enter: Open selected item
+• Escape: Close menu/dialog
+
+GAMES
+• Solitaire: Classic card game
+• Minesweeper: Mine-sweeping puzzle
+
+CONTACT
+• Social links on desktop
+• Newsletter signup available
+
+Need more help? Click Help in any window's menu bar.
+```
+
+---
+
+## Deliverables for Phase 1
+
+### Required Outputs
+✅ Fully functional Windows 95 desktop interface
+✅ Working Start Menu with all submenus
+✅ All 10 desktop icons (functional when clicked)
+✅ Direct shortcuts to YouTube, LinkedIn, Newsletter, Twitter
+✅ Taskbar with clock (live time)
+✅ Window system with drag, resize, minimize, maximize, close
+✅ My Computer with folder navigation
+✅ Photos folder with 8+ nostalgic images
+✅ Games folder with Solitaire and Minesweeper
+✅ Both games fully playable
+✅ Internet Explorer window (blog/articles section)
+✅ Recycle Bin with placeholder content
+✅ Network folder with social links
+✅ Wallpaper selection system (5 options)
+✅ Display Settings window
+✅ Right-click context menus
+✅ Modal dialogs (alerts, confirms)
+✅ Responsive design (desktop, tablet, mobile)
+✅ localStorage persistence (wallpaper, positions)
+✅ Authentic Windows 95 styling throughout
+
+### File Deliverables
+- Complete HTML/CSS/JavaScript source code
+- All image assets (icons, wallpapers, photos)
+- README.md with setup instructions
+- Comments explaining key functionality
+
+---
+
+## Build Instructions
+
+**IMPORTANT: BUILD ONLY PHASE 1 FIRST**
+
+Do not implement Phase 2 or Phase 3 features yet. Focus on getting the core desktop experience working perfectly before adding media players and easter eggs.
+
+### Build Order (Recommended)
+1. Desktop layout and styling
+2. Taskbar and Start Menu
+3. Window system (drag, resize, focus)
+4. Desktop icons (placement and interaction)
+5. My Computer and folder navigation
+6. Solitaire game (fully playable)
+7. Minesweeper game (fully playable)
+8. Photos folder with images
+9. Social link shortcuts
+10. Wallpaper system
+11. Polish, test, and optimize
+
+### Testing Checklist Before Phase 2
+- [ ] All icons double-click to open
+- [ ] Windows drag smoothly
+- [ ] Windows resize from all edges/corners
+- [ ] Minimize/maximize/close works
+- [ ] Start Menu opens and navigates correctly
+- [ ] Clock shows correct time
+- [ ] Solitaire is playable and winnable
+- [ ] Minesweeper is playable and winnable
+- [ ] All social links open correct URLs
+- [ ] Wallpaper selection saves and persists
+- [ ] Works on mobile (responsive mode)
+- [ ] No console errors
+- [ ] Smooth performance (60fps)
+
+---
+
+## Notes for Implementation
+
+### Recommended Tech Stack
+- **React** (component-based windows)
+- **CSS/Styled Components** (Windows 95 styling)
+- **React-DnD or custom** (drag and drop)
+- **localStorage** (persistence)
+- **Framer Motion** (animations - optional)
+
+### Key Components to Build
+- `<Desktop>` - Main container
+- `<Icon>` - Reusable desktop icon
+- `<Window>` - Reusable window with title bar, content, controls
+- `<Taskbar>` - Bottom bar with Start, window buttons, tray
+- `<StartMenu>` - Hierarchical menu system
+- `<Explorer>` - File/folder browser
+- `<Solitaire>` - Card game
+- `<Minesweeper>` - Mine game
+- `<Dialog>` - Modal popup (alert, confirm, input)
+
+### Styling Approach
+- Use CSS for authentic 3D borders (box-shadow, border-style: outset/inset)
+- Custom cursors via CSS
+- Icon font or SVG for system icons
+- Bitmap images for desktop icons
+- CSS Grid for icon arrangement
+- Flexbox for window layouts
+
+### State Management
+- Track open windows (array of objects)
+- Active window (z-index management)
+- Desktop icon positions (grid or free drag)
+- Window positions and sizes
+- Selected items
+- User preferences (wallpaper, etc.)
+
+### Important: Authentic Feel
+- Windows 95 was snappy - animations should be fast (<300ms)
+- Borders must have 3D effect (highlight/shadow)
+- Sounds optional for Phase 1 but consider adding later
+- Pixel-perfect fonts and icons
+- Proper cursor changes
+- Focus/active states clearly visible
+
+---
+
+## Phase 2 & 3 Preview (DO NOT BUILD YET)
+
+**Phase 2 will add:**
+- Windows Media Player with visualizations
+- Winamp with skins
+- RealPlayer
+- 80s Synthwave music playlist
+- WinZip compression tool
+- Paint Shop Pro image editor
+- All with authentic 90s logos
+
+**Phase 3 will add:**
+- Ctrl+Alt+Del Task Manager
+- Blue Screen of Death (BSOD)
+- Clippy assistant
+- Konami Code easter egg
+- 10+ hidden features
+- Achievement system
+- Screensaver mode
+- Mobile enhancements
+
+Build Phase 1 completely before moving to Phase 2.
+
+---
+
+## Questions to Address Before Building
+
+1. **Content**: Do you have actual resume content, about text, and project descriptions ready?
+2. **Links**: What are your actual YouTube, LinkedIn, Twitter, Newsletter URLs?
+3. **Photos**: Do you have specific nostalgic images you want, or should I source royalty-free 90s images?
+4. **Blog**: Do you have blog content, or should Internet Explorer just show placeholder posts?
+5. **Projects**: How many portfolio projects (3-5 recommended), and do you have descriptions?
+6. **Branding**: Any specific colors or personal branding beyond Windows 95 theme?
+
+---
+
+## Success Criteria for Phase 1
+
+Phase 1 is complete when:
+✅ A visitor can explore your entire desktop
+✅ All social links work
+✅ Both games are fully playable
+✅ Windows feel like real Windows 95
+✅ Mobile experience is usable
+✅ Performance is smooth
+✅ No bugs or console errors
+✅ Content is complete (resume, about, projects)
+
+**Then we move to Phase 2!**
