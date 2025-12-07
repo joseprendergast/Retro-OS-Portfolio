@@ -42,6 +42,7 @@ import diabloIcon from '@assets/image_1765118928021.png';
 import diabloImage from '@assets/image_1765118507784.png';
 import diablo2Icon from '@assets/image_1765118662569.png';
 import diablo2Image from '@assets/image_1765118693762.png';
+import redAlertIcon from '@assets/image_1765119215571.png';
 
 interface DesktopIconData {
   id: string;
@@ -60,7 +61,7 @@ const DESKTOP_ICONS: DesktopIconData[] = [
   { id: 'solitaire', label: 'Solitaire', icon: <Freecell1 variant="32x32_4" />, component: 'Solitaire' },
   { id: 'minesweeper', label: 'Minesweeper', icon: <Winmine1 variant="32x32_4" />, component: 'Minesweeper' },
   { id: 'starcraft', label: 'Starcraft', icon: <img src={starcraftIcon} alt="Starcraft" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
-  { id: 'red-alert', label: 'Red Alert 2', icon: <Joy102 variant="32x32_4" />, component: 'GameImage' },
+  { id: 'red-alert', label: 'Red Alert 2', icon: <img src={redAlertIcon} alt="Red Alert 2" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'sims', label: 'The Sims', icon: <img src={simsIcon} alt="The Sims" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'age-of-empires', label: 'Age of Empires', icon: <img src={ageOfEmpiresIcon} alt="Age of Empires" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'diablo', label: 'Diablo', icon: <img src={diabloIcon} alt="Diablo" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
