@@ -40,6 +40,8 @@ import ageOfEmpiresImage from '@assets/ages_of_empire_1765116863384.png';
 import ageOfEmpiresIcon from '@assets/image_1765118009278.png';
 import diabloIcon from '@assets/image_1765118438635.png';
 import diabloImage from '@assets/image_1765118507784.png';
+import diablo2Icon from '@assets/image_1765118662569.png';
+import diablo2Image from '@assets/image_1765118693762.png';
 
 interface DesktopIconData {
   id: string;
@@ -62,6 +64,7 @@ const DESKTOP_ICONS: DesktopIconData[] = [
   { id: 'sims', label: 'The Sims', icon: <img src={simsIcon} alt="The Sims" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'age-of-empires', label: 'Age of Empires', icon: <img src={ageOfEmpiresIcon} alt="Age of Empires" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'diablo', label: 'Diablo', icon: <img src={diabloIcon} alt="Diablo" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
+  { id: 'diablo2', label: 'Diablo 2', icon: <img src={diablo2Icon} alt="Diablo 2" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'newsletter', label: 'Substack', icon: <Mail variant="32x32_4" />, isShortcut: true, url: 'https://joseprendergast.substack.com/' },
   { id: 'twitter', label: 'Twitter', icon: <Globe variant="32x32_4" />, isShortcut: true, url: 'https://twitter.com' },
 ];
@@ -114,6 +117,7 @@ const GAME_IMAGES: Record<string, string> = {
   'sims': simsImage,
   'age-of-empires': ageOfEmpiresImage,
   'diablo': diabloImage,
+  'diablo2': diablo2Image,
 };
 
 const FILE_CONTENTS: Record<string, string> = {
