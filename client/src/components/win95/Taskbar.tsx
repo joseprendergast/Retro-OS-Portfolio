@@ -3,6 +3,7 @@ import { Button, Toolbar, Panel } from 'react95';
 import styled from 'styled-components';
 import { useWindowManager } from '@/lib/windowManager';
 import { useDesktopStore } from '@/lib/desktopStore';
+import { Logo } from '@react95/icons';
 
 const TaskbarContainer = styled(Panel)`
   position: fixed;
@@ -107,7 +108,7 @@ export default function Taskbar() {
 
   return (
     <TaskbarContainer
-      variant="raised"
+      variant="outside"
       data-testid="taskbar"
       onClick={(e: React.MouseEvent) => e.stopPropagation()}
     >
@@ -119,7 +120,7 @@ export default function Taskbar() {
         }}
         data-testid="button-start"
       >
-        <IconSpan>🪟</IconSpan>
+        <Logo style={{ width: 16, height: 16 }} />
         <span>Start</span>
       </StartButton>
 

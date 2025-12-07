@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ReactNode } from 'react';
 import { useWindowManager } from '@/lib/windowManager';
 import { useDesktopStore, WallpaperType } from '@/lib/desktopStore';
 import DesktopIcon from './DesktopIcon';
@@ -15,6 +15,18 @@ import ImageViewer from './ImageViewer';
 import DisplaySettings from './DisplaySettings';
 import NewsletterDialog from './NewsletterDialog';
 
+import {
+  Computer,
+  Explorer100,
+  RecycleFull,
+  FolderOpen,
+  Joy102,
+  Notepad2,
+  Mail,
+  Globe,
+  Winmine1,
+} from '@react95/icons';
+
 import cloudsWallpaper from '@assets/stock_images/windows_95_blue_sky__82d519de.jpg';
 import crtImage from '@assets/generated_images/90s_crt_computer_setup.png';
 import floppyImage from '@assets/generated_images/colorful_floppy_disks_stack.png';
@@ -28,15 +40,24 @@ import simsImage from '@assets/stock_images/sims_life_simulation_7742b6a8.jpg';
 import ageOfEmpiresImage from '@assets/stock_images/age_of_empires_medie_e79e2e82.jpg';
 import finalFantasyImage from '@assets/stock_images/final_fantasy_fantas_de799221.jpg';
 
-const DESKTOP_ICONS = [
-  { id: 'my-computer', label: 'My Computer', icon: '💻', component: 'MyComputer' },
-  { id: 'internet-explorer', label: 'Internet Explorer', icon: '🌐', component: 'InternetExplorer' },
-  { id: 'recycle-bin', label: 'Recycle Bin', icon: '🗑', component: 'RecycleBin' },
-  { id: 'photos', label: 'Photos', icon: '🖼', component: 'Photos' },
-  { id: 'games', label: 'Games', icon: '🎮', component: 'Games' },
-  { id: 'experience', label: 'Experience', icon: '📋', component: 'Experience' },
-  { id: 'newsletter', label: 'Newsletter', icon: '📧', isShortcut: true, component: 'Newsletter' },
-  { id: 'twitter', label: 'Twitter', icon: '🐦', isShortcut: true, url: 'https://twitter.com' },
+interface DesktopIconData {
+  id: string;
+  label: string;
+  icon: ReactNode;
+  component?: string;
+  isShortcut?: boolean;
+  url?: string;
+}
+
+const DESKTOP_ICONS: DesktopIconData[] = [
+  { id: 'my-computer', label: 'My Computer', icon: <Computer variant="32x32_4" />, component: 'MyComputer' },
+  { id: 'internet-explorer', label: 'Internet Explorer', icon: <Explorer100 variant="32x32_4" />, component: 'InternetExplorer' },
+  { id: 'recycle-bin', label: 'Recycle Bin', icon: <RecycleFull variant="32x32_4" />, component: 'RecycleBin' },
+  { id: 'photos', label: 'Photos', icon: <FolderOpen variant="32x32_4" />, component: 'Photos' },
+  { id: 'games', label: 'Games', icon: <Joy102 variant="32x32_4" />, component: 'Games' },
+  { id: 'experience', label: 'Experience', icon: <Notepad2 variant="32x32_4" />, component: 'Experience' },
+  { id: 'newsletter', label: 'Newsletter', icon: <Mail variant="32x32_4" />, isShortcut: true, component: 'Newsletter' },
+  { id: 'twitter', label: 'Twitter', icon: <Globe variant="32x32_4" />, isShortcut: true, url: 'https://twitter.com' },
 ];
 
 const MY_COMPUTER_FILES: FileItem[] = [

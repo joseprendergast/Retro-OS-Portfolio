@@ -1,0 +1,231 @@
+Experience
+
+
+
+AlixPartners logo
+SVP, Product Management
+
+AlixPartners · Full-time
+
+Nov 2024 - Present · 1 yr 2 mos
+
+New York City Metropolitan Area · Hybrid
+
+Principal Product Manager for Platforms Innovation and AI: Driving the development of 0-to-1 Data Analytics and platform products to reshape how consultants collaborate with clients, thus enhancing their time to value.
+
+Leading two different suites of products E2E:
+
+ ➤ Elevation: The firm's premier Program Management and financial tracking platform monitors PMO initiatives and activities alongside their financial implications. It provides accurate impact analysis on P&L and the overall company value, leading to savings of hundreds of millions.
+
+➤ Working Capital Management tool: A diagnostics tool that offers comprehensive insights into working capital by analyzing raw and incomplete data to compute essential metrics of the Cash Conversion Cycle. It is widely utilized for facilitating private equity company assessments, as well as turnaround and restructuring efforts initiatives.
+
+Thumbnail for Jose Prendergast
+Jose Prendergast
+
+ Product Launch, Product Management and +2 skills
+
+
+Everything Marketplaces logo
+Community member
+
+Everything Marketplaces · Full-time
+
+2023 - Present · 3 yrs
+
+San Francisco Bay Area · Remote
+
+ Consulting and Online Marketplace
+
+
+PlateRate logo
+Product Advisor
+
+PlateRate · Freelance
+
+Jul 2024 - Nov 2024 · 5 mos
+
+New York · Remote
+
+Thumbnail for Product of the Year (The 10th Annual Product Management Awards)
+Product of the Year (The 10th Annual Product Management Awards)
+
+Awarded product of the year in the 10th Annual Product Management Awards of TPG
+
+ product-led growth, Product Leadership and +2 skills
+
+
+Qviro.com logo
+Product Advisor / Fractional CPO
+
+Qviro.com · Freelance
+
+May 2024 - Nov 2024 · 7 mos
+
+New York City Metropolitan Area · Remote
+
+ product-led growth, Product Leadership and +2 skills
+
+
+Dot Foods logo
+Director of Product Management
+
+Dot Foods · Full-time
+
+Jan 2022 - Jun 2024 · 2 yrs 6 mos
+
+New York City Metropolitan Area · Hybrid
+
+Led Anchovi (Instacart-like marketplace for Restaurants, Distributors & end users) for both desktop and mobile from inception to growth phase, leveraging a 3M+ items data lake for strategic product development and market positioning (Anchovi was part of Morsum LLC acquired by Dot Foods in 2021)
+
+• Designed, hired, and managed a team of PMs across AI/ML, Data Analytics/Enrichment, and Marketplace/e-commerce platform
+•  Enhanced network effect growth by adding dozens of new suppliers and thousands of restaurants and users in under 2 years
+•  Developed and monetized Data Analytics, Dashboards, and AI/ML products to increase user adoption, generating additional revenue through innovative feature releases
+•  Productized payments and all API & Flat Files integrations with 3rd party ERPs, accelerating supplier adoption.
+• Led PLG initiatives including a simplified self sign-up process, free trials, optimized self-onboarding, product upgrade path, referral programs, and funnel analysis (Amplitude & FullStory)
+• Implemented AI tools and best practices, improving delivery efficacy and reducing time-to-market
+
+Thumbnail for Anchovi Introduces White-Label Branding & Enhanced ERP Integration Capabilities
+Anchovi Introduces White-Label Branding & Enhanced ERP Integration Capabilities
+
+Anchovi, the leading food industry data and AI e-commerce solution, enables food service professionals and users to simplify their ordering by using machine learning models, LLMs, and Data Enrichment solutions
+
+Thumbnail for Dot Foods acquires Morsum, an AI/ML Food Tech SaaS Company
+Dot Foods acquires Morsum, an AI/ML Food Tech SaaS Company
+
+Morsum was acquired by Dot Foods in 2022 to reinforce its Marketplace/E-commerce presence with Distributors, Restaurants, chefs, and others
+
+ Problem Solving, Software as a Service (SaaS) and +16 skills
+
+
+Santander US logo
+IT Sr. Portfolio Manager
+
+Santander US · Contract
+
+Oct 2020 - Jan 2022 · 1 yr 4 mos
+
+New York City Metropolitan Area · Hybrid
+
+Led and owned the delivery and P&L of the IT infrastructure project portfolio consisting of 38 projects with a $23M budget and a team of 18 PMs, saving $5.5M yearly
+
+• Managed all IT project portfolio, streamlining execution and resource allocation.
+• Implemented processes for project governance, risk mitigation, and cross-team alignment.
+• Enhanced portfolio reporting, increasing transparency for senior management decisions.
+
+
+SNGULAR logo
+Group Product Manager
+
+SNGULAR · Full-time
+
+Mar 2020 - Jan 2022 · 1 yr 11 mos
+
+New York City Metropolitan Area
+
+Launched the platform Sngular Trials (Desktop and Mobile) to create and connect open trials with potential candidates, heading a team of PMs, engineers, and designers across the US, Mexico, and Europe, achieving key milestones from ideation to market readiness
+
+•  Established and enhanced team performance through empathetic leadership, defining clear roles, responsibilities, and expectations while designing a high-delivery international organization
+•  Introduced inaugural 0-1 MVP using A/B testing to quickly validate assumptions and reach product-market fit, securing first customers and establishing a scalable framework
+•  Rapidly launched 10 critical features using CI/CD, reducing lab and physician costs by 50% and eliminating in-person visits during COVID, increasing accessibility for patients
+•  Led PLG strategy including initiatives such as self-service onboarding for new patients and physicians, real-time collaboration, API ecosystem and others
+
+Thumbnail for SNGULAR Trials SaaS Platform
+SNGULAR Trials SaaS Platform
+
+During the pandemic, we created SNGULAR Trials, a platform that enables remote clinical trials to be conducted by connecting patients with medical staff without the need to travel to the hospital or clinic.
+
+ Problem Solving, Software as a Service (SaaS) and +12 skills
+
+
+Orange logo
+Lead Product Manager
+
+Orange · Full-time
+
+Jan 2018 - Mar 2020 · 2 yrs 3 mos
+
+Europe
+
+Founding and first Product Manager for Orange-X (X by Orange), a subsidiary of Orange, focused on providing cybersecurity products to European SMBs and users to ensure GDPR compliance
+
+• Designed and executed the launch of the Cloud Services Marketplace/e-commerce, integrating 4 complex vendor services in 9 months, including SDWAN and Checkpoint Security, ensuring seamless service delivery utilizing a small, agile team of engineers, data scientists, DevOps, and designers
+• Set the blueprint for and constructed the first product team, scaling up to 10 and playing a pivotal role in the organization's aggressive growth plan (150 employees in < 2 years)
+• Implemented comprehensive PLG strategy including self-service onboarding, freemium model, usage-based pricing, and automated upsell recommendations, resulting in improved user experience and increased revenue (increasing adoption, conversion, and ARPU)
+• Implemented dynamic integration ecosystem with user feedback loop and feature adoption tracking.
+
+Thumbnail for X by Orange Microservices Architecture
+X by Orange Microservices Architecture
+
+Thumbnail for Case Study - X by Orange using AWS S3, Amazon EMR and Amazon MSK
+Case Study - X by Orange using AWS S3, Amazon EMR and Amazon MSK
+
+The cloud-native microservices architecture of X by Orange with AWS allows for rapid development and deployment of new features, reducing time to market by 50% and real-time agile billing
+
+ Problem Solving, Software as a Service (SaaS) and +14 skills
+
+
+NEC Corporation logo
+Senior Product Manager
+
+NEC Corporation · Full-time
+
+May 2015 - Jan 2018 · 2 yrs 9 mos
+
+Europe & LATAM
+
+Led the Marketplace/E-commerce SaaS platform for third-party apps (ISVs), integrating 20+ suppliers via APIs with over 50K SKUs, expanding product offerings threefold, and building a toolkit of features for vendors to increase adoption
+
+• Grew from a single marketplace in 5 countries to 12 configurable marketplaces in 15+ countries, launching the product in North America, South America, Europe, and Japan in big telcos like AT&T, T-Mobile, Telefonica, O2 & Tokai Comms.
+• Launched 30+ annual critical features & Managed a multidisciplinary team of 14 (with 4 direct reports), including user experience leads and designers 
+• Developed and Designed an API ecosystem, fostering third-party integrations and increasing platform stickiness
+• Drove Product-Led Growth (PLG) initiatives, implementing product-driven user acquisition, education, usage-based pricing, feature adoption tracking, and integration ecosystem
+
+Thumbnail for NEC's launch ready-to-use business applications Marketplace (Cloud Store)
+NEC's launch ready-to-use business applications Marketplace (Cloud Store)
+
+NEC's launch of Cloud Store enables ICT service providers to offer ready-to-use business applications from the cloud
+
+Thumbnail for Case Study - NEC Marketplace
+Case Study - NEC Marketplace
+
+How NEC enabled Telco customers from 16 countries to benefit from Cloud Services
+
+ Problem Solving, Software as a Service (SaaS) and +11 skills
+
+
+Telefonica logo
+Telefonica
+
+Full-time · 3 yrs 6 mos
+
+Global Product Manager
+
+Jan 2014 - May 2015 · 1 yr 5 mos
+
+São Paulo Area, Brazil · On-site
+
+
+Led and expanded the Marketplace/E-commerce SaaS Platform for third-party apps by signing up and integrating over 20 leading ISV suppliers, including Microsoft, McAfee, and Box, localizing and adapting the product for the US, Europe, and Latin American market
+
+• Increased product adoption by 40% by launching over 50 new features customizable for 3 new countries, including Brazil with 90M+ new customers, enhancing user experience
+• Developed go-to-market strategies for new product launches, ensuring successful entry into new markets
+• Analyzed user feedback to drive continuous product improvements and address market needs
+
+Thumbnail for Telefonica Launches SaaS Platform in Brazil
+Telefonica Launches SaaS Platform in Brazil
+
+Skills: Problem Solving, Software as a Service (SaaS), +10 skills
+
+Sr. Solutions Consultant
+
+Dec 2011 - Jan 2014 · 2 yrs 2 mos
+
+Europe & LATAM
+
+
+Responsible for technical SaaS and IaaS solutions for Digital Transformation including writing and bidding on RFPs, gathering requirements, and building tailored solutions for key clients.
+
+• Increased 3x the revenue of the top 5 customers by automating their procurement and offering process
+• Sold and Executed more than $10M in offers reaching 100%+ of the goal in 2012 and 2013
+
+Skills: Software as a Service (SaaS), Consulting, +2 skills

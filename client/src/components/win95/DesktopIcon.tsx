@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import styled from 'styled-components';
 import { useDesktopStore } from '@/lib/desktopStore';
 
 interface DesktopIconProps {
   id: string;
   label: string;
-  icon: string;
+  icon: ReactNode;
   isShortcut?: boolean;
   onDoubleClick: () => void;
   onContextMenu?: (e: React.MouseEvent) => void;
@@ -30,9 +30,12 @@ const IconImage = styled.div<{ $isSelected?: boolean }>`
   background: ${props => props.$isSelected ? 'rgba(0, 0, 128, 0.5)' : 'transparent'};
 `;
 
-const IconEmoji = styled.span`
+const IconWrapper = styled.div`
   font-size: 32px;
   image-rendering: pixelated;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ShortcutArrow = styled.div`
@@ -98,7 +101,7 @@ export default function DesktopIcon({
       data-testid={`icon-${id}`}
     >
       <IconImage $isSelected={isSelected}>
-        <IconEmoji>{icon}</IconEmoji>
+        <IconWrapper>{icon}</IconWrapper>
         {isShortcut && (
           <ShortcutArrow>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
