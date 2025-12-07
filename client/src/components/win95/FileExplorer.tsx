@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { Button, Toolbar, Panel } from 'react95';
 import styled from 'styled-components';
 
 export interface FileItem {
   id: string;
   name: string;
-  icon: string;
+  icon: ReactNode;
   type: 'folder' | 'file' | 'shortcut';
   action?: () => void;
   children?: FileItem[];

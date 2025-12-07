@@ -20,11 +20,15 @@ import {
   Explorer100,
   RecycleFull,
   FolderOpen,
+  Folder,
   Joy102,
   Notepad2,
   Mail,
   Globe,
   Winmine1,
+  Freecell1,
+  Mmsys101,
+  Shell3233,
 } from '@react95/icons';
 
 import cloudsWallpaper from '@assets/stock_images/windows_95_blue_sky__82d519de.jpg';
@@ -64,50 +68,50 @@ const MY_COMPUTER_FILES: FileItem[] = [
   {
     id: 'my-documents',
     name: 'My Documents',
-    icon: '📁',
+    icon: <Folder variant="32x32_4" />,
     type: 'folder',
     children: [
-      { id: 'resume', name: 'Resume.doc', icon: '📄', type: 'file' },
-      { id: 'about-me', name: 'About_Me.txt', icon: '📝', type: 'file' },
+      { id: 'resume', name: 'Resume.doc', icon: <Notepad2 variant="32x32_4" />, type: 'file' },
+      { id: 'about-me', name: 'About_Me.txt', icon: <Notepad2 variant="32x32_4" />, type: 'file' },
       {
         id: 'projects',
         name: 'Projects',
-        icon: '📁',
+        icon: <Folder variant="32x32_4" />,
         type: 'folder',
         children: [
-          { id: 'project-1', name: 'Project_1', icon: '📁', type: 'folder', children: [{ id: 'desc-1', name: 'Description.txt', icon: '📝', type: 'file' }] },
-          { id: 'project-2', name: 'Project_2', icon: '📁', type: 'folder', children: [{ id: 'desc-2', name: 'Description.txt', icon: '📝', type: 'file' }] },
-          { id: 'project-3', name: 'Project_3', icon: '📁', type: 'folder', children: [{ id: 'desc-3', name: 'Description.txt', icon: '📝', type: 'file' }] },
+          { id: 'project-1', name: 'Project_1', icon: <Folder variant="32x32_4" />, type: 'folder', children: [{ id: 'desc-1', name: 'Description.txt', icon: <Notepad2 variant="32x32_4" />, type: 'file' }] },
+          { id: 'project-2', name: 'Project_2', icon: <Folder variant="32x32_4" />, type: 'folder', children: [{ id: 'desc-2', name: 'Description.txt', icon: <Notepad2 variant="32x32_4" />, type: 'file' }] },
+          { id: 'project-3', name: 'Project_3', icon: <Folder variant="32x32_4" />, type: 'folder', children: [{ id: 'desc-3', name: 'Description.txt', icon: <Notepad2 variant="32x32_4" />, type: 'file' }] },
         ],
       },
     ],
   },
-  { id: 'my-pictures', name: 'My Pictures', icon: '🖼', type: 'folder', children: [] },
-  { id: 'my-music', name: 'My Music', icon: '🎵', type: 'folder', children: [] },
+  { id: 'my-pictures', name: 'My Pictures', icon: <Shell3233 variant="32x32_4" />, type: 'folder', children: [] },
+  { id: 'my-music', name: 'My Music', icon: <Mmsys101 variant="32x32_4" />, type: 'folder', children: [] },
 ];
 
 const PHOTOS_FILES: FileItem[] = [
-  { id: 'crt', name: 'CRT_Computer.png', icon: '🖼', type: 'file' },
-  { id: 'floppy', name: 'Floppy_Disks.png', icon: '🖼', type: 'file' },
-  { id: 'cdrom', name: 'CD_Collection.png', icon: '🖼', type: 'file' },
-  { id: 'modem', name: 'Dial_Up_Modem.png', icon: '🖼', type: 'file' },
-  { id: 'pixel', name: 'Pixel_Art.png', icon: '🖼', type: 'file' },
+  { id: 'crt', name: 'CRT_Computer.png', icon: <Shell3233 variant="32x32_4" />, type: 'file' },
+  { id: 'floppy', name: 'Floppy_Disks.png', icon: <Shell3233 variant="32x32_4" />, type: 'file' },
+  { id: 'cdrom', name: 'CD_Collection.png', icon: <Shell3233 variant="32x32_4" />, type: 'file' },
+  { id: 'modem', name: 'Dial_Up_Modem.png', icon: <Shell3233 variant="32x32_4" />, type: 'file' },
+  { id: 'pixel', name: 'Pixel_Art.png', icon: <Shell3233 variant="32x32_4" />, type: 'file' },
 ];
 
 const RECYCLE_BIN_FILES: FileItem[] = [
-  { id: 'old-resume', name: 'old_resume_draft.doc', icon: '📄', type: 'file' },
-  { id: 'cringe', name: 'cringe_photo.bmp', icon: '🖼', type: 'file' },
-  { id: 'test', name: 'test_file.txt', icon: '📝', type: 'file' },
+  { id: 'old-resume', name: 'old_resume_draft.doc', icon: <Notepad2 variant="32x32_4" />, type: 'file' },
+  { id: 'cringe', name: 'cringe_photo.bmp', icon: <Shell3233 variant="32x32_4" />, type: 'file' },
+  { id: 'test', name: 'test_file.txt', icon: <Notepad2 variant="32x32_4" />, type: 'file' },
 ];
 
 const GAMES_FILES: FileItem[] = [
-  { id: 'solitaire', name: 'Solitaire', icon: '🃏', type: 'file' },
-  { id: 'minesweeper', name: 'Minesweeper', icon: '💣', type: 'file' },
-  { id: 'starcraft', name: 'Starcraft', icon: '🎮', type: 'file' },
-  { id: 'red-alert', name: 'Command & Conquer: Red Alert 2', icon: '🎮', type: 'file' },
-  { id: 'sims', name: 'The Sims', icon: '🎮', type: 'file' },
-  { id: 'age-of-empires', name: 'Age of Empires', icon: '🎮', type: 'file' },
-  { id: 'final-fantasy', name: 'Final Fantasy VII', icon: '🎮', type: 'file' },
+  { id: 'solitaire', name: 'Solitaire', icon: <Freecell1 variant="32x32_4" />, type: 'file' },
+  { id: 'minesweeper', name: 'Minesweeper', icon: <Winmine1 variant="32x32_4" />, type: 'file' },
+  { id: 'starcraft', name: 'Starcraft', icon: <Joy102 variant="32x32_4" />, type: 'file' },
+  { id: 'red-alert', name: 'Command & Conquer: Red Alert 2', icon: <Joy102 variant="32x32_4" />, type: 'file' },
+  { id: 'sims', name: 'The Sims', icon: <Joy102 variant="32x32_4" />, type: 'file' },
+  { id: 'age-of-empires', name: 'Age of Empires', icon: <Joy102 variant="32x32_4" />, type: 'file' },
+  { id: 'final-fantasy', name: 'Final Fantasy VII', icon: <Joy102 variant="32x32_4" />, type: 'file' },
 ];
 
 const GAME_IMAGES: Record<string, string> = {
@@ -284,35 +288,35 @@ export default function Desktop() {
     {
       id: 'programs',
       label: 'Programs',
-      icon: '📁',
+      icon: <FolderOpen variant="16x16_4" />,
       submenu: [
         {
           id: 'games-menu',
           label: 'Games',
-          icon: '🎮',
+          icon: <Joy102 variant="16x16_4" />,
           submenu: [
-            { id: 'solitaire', label: 'Solitaire', icon: '🃏' },
-            { id: 'minesweeper', label: 'Minesweeper', icon: '💣' },
+            { id: 'solitaire', label: 'Solitaire', icon: <Freecell1 variant="16x16_4" /> },
+            { id: 'minesweeper', label: 'Minesweeper', icon: <Winmine1 variant="16x16_4" /> },
           ],
         },
-        { id: 'ie', label: 'Internet Explorer', icon: '🌐' },
+        { id: 'ie', label: 'Internet Explorer', icon: <Explorer100 variant="16x16_4" /> },
       ],
     },
     {
       id: 'documents',
       label: 'Documents',
-      icon: '📄',
+      icon: <Notepad2 variant="16x16_4" />,
       submenu: [
-        { id: 'resume-doc', label: 'Resume.doc', icon: '📄' },
-        { id: 'about-txt', label: 'About_Me.txt', icon: '📝' },
+        { id: 'resume-doc', label: 'Resume.doc', icon: <Notepad2 variant="16x16_4" /> },
+        { id: 'about-txt', label: 'About_Me.txt', icon: <Notepad2 variant="16x16_4" /> },
         {
           id: 'projects-menu',
           label: 'Projects',
-          icon: '📁',
+          icon: <Folder variant="16x16_4" />,
           submenu: [
-            { id: 'project-1-menu', label: 'Project_1', icon: '📁' },
-            { id: 'project-2-menu', label: 'Project_2', icon: '📁' },
-            { id: 'project-3-menu', label: 'Project_3', icon: '📁' },
+            { id: 'project-1-menu', label: 'Project_1', icon: <Folder variant="16x16_4" /> },
+            { id: 'project-2-menu', label: 'Project_2', icon: <Folder variant="16x16_4" /> },
+            { id: 'project-3-menu', label: 'Project_3', icon: <Folder variant="16x16_4" /> },
           ],
         },
       ],
@@ -320,13 +324,13 @@ export default function Desktop() {
     {
       id: 'settings',
       label: 'Settings',
-      icon: '⚙',
-      submenu: [{ id: 'display', label: 'Display', icon: '🖥' }],
+      icon: <Computer variant="16x16_4" />,
+      submenu: [{ id: 'display', label: 'Display', icon: <Computer variant="16x16_4" /> }],
     },
-    { id: 'find', label: 'Find', icon: '🔍' },
-    { id: 'help', label: 'Help', icon: '❓' },
-    { id: 'run', label: 'Run...', icon: '▶', separator: true },
-    { id: 'shutdown', label: 'Shut Down...', icon: '🔌', separator: true },
+    { id: 'find', label: 'Find', icon: <Globe variant="16x16_4" /> },
+    { id: 'help', label: 'Help', icon: <Globe variant="16x16_4" /> },
+    { id: 'run', label: 'Run...', icon: <Computer variant="16x16_4" />, separator: true },
+    { id: 'shutdown', label: 'Shut Down...', icon: <Computer variant="16x16_4" />, separator: true },
   ];
 
   const handleStartMenuClick = (item: MenuItem) => {

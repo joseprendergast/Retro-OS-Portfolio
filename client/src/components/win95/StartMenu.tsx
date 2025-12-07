@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { MenuList, MenuListItem, Separator } from 'react95';
 import styled from 'styled-components';
 import { useDesktopStore } from '@/lib/desktopStore';
@@ -6,7 +6,7 @@ import { useDesktopStore } from '@/lib/desktopStore';
 export interface MenuItem {
   id: string;
   label: string;
-  icon: string;
+  icon: ReactNode;
   action?: () => void;
   submenu?: MenuItem[];
   separator?: boolean;
