@@ -31,11 +31,11 @@ import {
 } from '@react95/icons';
 
 
-import starcraftImage from '@assets/stock_images/starcraft_video_game_faa55a3d.jpg';
-import redAlertImage from '@assets/stock_images/red_alert_military_t_ed9e3e3c.jpg';
-import simsImage from '@assets/stock_images/sims_life_simulation_7742b6a8.jpg';
-import ageOfEmpiresImage from '@assets/stock_images/age_of_empires_medie_e79e2e82.jpg';
-import finalFantasyImage from '@assets/stock_images/final_fantasy_fantas_de799221.jpg';
+import starcraftImage from '@assets/starcraft_1765116863386.jpg';
+import starcraftIcon from '@assets/1_1765116863380.ico';
+import redAlertImage from '@assets/redalert_2_1765116863385.jpg';
+import simsImage from '@assets/sims_1765116863385.jpeg';
+import ageOfEmpiresImage from '@assets/ages_of_empire_1765116863384.png';
 
 interface DesktopIconData {
   id: string;
@@ -92,11 +92,10 @@ const RECYCLE_BIN_FILES: FileItem[] = [
 const GAMES_FILES: FileItem[] = [
   { id: 'solitaire', name: 'Solitaire', icon: <Freecell1 variant="32x32_4" />, type: 'file' },
   { id: 'minesweeper', name: 'Minesweeper', icon: <Winmine1 variant="32x32_4" />, type: 'file' },
-  { id: 'starcraft', name: 'Starcraft', icon: <Joy102 variant="32x32_4" />, type: 'file' },
+  { id: 'starcraft', name: 'Starcraft', icon: <img src={starcraftIcon} alt="Starcraft" style={{ width: 32, height: 32 }} />, type: 'file' },
   { id: 'red-alert', name: 'Command & Conquer: Red Alert 2', icon: <Joy102 variant="32x32_4" />, type: 'file' },
   { id: 'sims', name: 'The Sims', icon: <Joy102 variant="32x32_4" />, type: 'file' },
   { id: 'age-of-empires', name: 'Age of Empires', icon: <Joy102 variant="32x32_4" />, type: 'file' },
-  { id: 'final-fantasy', name: 'Final Fantasy VII', icon: <Joy102 variant="32x32_4" />, type: 'file' },
 ];
 
 const GAME_IMAGES: Record<string, string> = {
@@ -104,7 +103,6 @@ const GAME_IMAGES: Record<string, string> = {
   'red-alert': redAlertImage,
   'sims': simsImage,
   'age-of-empires': ageOfEmpiresImage,
-  'final-fantasy': finalFantasyImage,
 };
 
 const FILE_CONTENTS: Record<string, string> = {
