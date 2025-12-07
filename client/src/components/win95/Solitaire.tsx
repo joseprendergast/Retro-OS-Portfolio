@@ -1,12 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
-import Win95Button from './Win95Button';
+import { Button, Panel } from 'react95';
+import styled from 'styled-components';
 
 type Suit = 'hearts' | 'diamonds' | 'clubs' | 'spades';
 type Card = { suit: Suit; value: number; faceUp: boolean };
 type GameState = 'playing' | 'won';
 
 const SUITS: Suit[] = ['hearts', 'diamonds', 'clubs', 'spades'];
-const SUIT_SYMBOLS: Record<Suit, string> = { hearts: '♥', diamonds: '♦', clubs: '♣', spades: '♠' };
+const SUIT_SYMBOLS: Record<Suit, string> = { hearts: 'H', diamonds: 'D', clubs: 'C', spades: 'S' };
 const SUIT_COLORS: Record<Suit, string> = { hearts: '#FF0000', diamonds: '#FF0000', clubs: '#000000', spades: '#000000' };
 const VALUE_NAMES: Record<number, string> = { 1: 'A', 11: 'J', 12: 'Q', 13: 'K' };
 
@@ -28,6 +29,125 @@ const shuffleDeck = (deck: Card[]): Card[] => {
   }
   return shuffled;
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #008000;
+  padding: 16px;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+`;
+
+const StatsContainer = styled.div`
+  display: flex;
+  gap: 16px;
+  color: white;
+  font-size: 12px;
+`;
+
+const TopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+`;
+
+const StockWasteContainer = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
+const FoundationsContainer = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
+const TableauContainer = styled.div`
+  display: flex;
+  gap: 8px;
+  flex: 1;
+`;
+
+const TableauPile = styled.div`
+  position: relative;
+  flex: 1;
+  min-width: 50px;
+`;
+
+const CardSlot = styled.div<{ $dashed?: boolean }>`
+  width: 50px;
+  height: 70px;
+  border-radius: 3px;
+  border: 2px dashed ${props => props.$dashed ? 'rgba(255,255,255,0.3)' : '#006600'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(255,255,255,0.5);
+  font-size: 20px;
+`;
+
+const CardBack = styled.div`
+  width: 50px;
+  height: 70px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #0000aa 0%, #000088 100%);
+  border: 1px solid white;
+  cursor: pointer;
+`;
+
+const CardFace = styled.div<{ $isSelected?: boolean; $color: string }>`
+  width: 50px;
+  height: 70px;
+  border-radius: 3px;
+  background: white;
+  border: ${props => props.$isSelected ? '2px solid #ffff00' : '1px solid #808080'};
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  color: ${props => props.$color};
+  user-select: none;
+`;
+
+const CardCenter = styled.div`
+  font-size: 18px;
+  text-align: center;
+`;
+
+const CardCorner = styled.div<{ $rotated?: boolean }>`
+  ${props => props.$rotated && 'transform: rotate(180deg);'}
+`;
+
+const StackedCard = styled.div<{ $offset: number }>`
+  position: absolute;
+  top: ${props => props.$offset * 20}px;
+`;
+
+const WinOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+`;
+
+const WinDialog = styled(Panel)`
+  padding: 16px;
+  text-align: center;
+  background: #c0c0c0;
+`;
 
 export default function Solitaire() {
   const [stock, setStock] = useState<Card[]>([]);
@@ -193,64 +313,46 @@ export default function Solitaire() {
     isSelected?: boolean;
   }) => {
     if (!card) {
-      return (
-        <div
-          className="w-[50px] h-[70px] rounded-sm border-2 border-dashed border-[#006600] bg-transparent cursor-pointer"
-          onClick={onClick}
-        />
-      );
+      return <CardSlot onClick={onClick} />;
     }
 
     if (!card.faceUp) {
-      return (
-        <div
-          className="w-[50px] h-[70px] rounded-sm bg-gradient-to-br from-blue-800 to-blue-600 border border-white cursor-pointer"
-          onClick={onClick}
-        />
-      );
+      return <CardBack onClick={onClick} />;
     }
 
     return (
-      <div
-        className={`w-[50px] h-[70px] rounded-sm bg-white border ${
-          isSelected ? 'border-yellow-400 border-2' : 'border-gray-400'
-        } cursor-pointer flex flex-col justify-between p-1 text-[12px] font-bold select-none`}
-        style={{ color: SUIT_COLORS[card.suit] }}
+      <CardFace
+        $isSelected={isSelected}
+        $color={SUIT_COLORS[card.suit]}
         onClick={onClick}
         onDoubleClick={onDoubleClick}
       >
-        <div>{getCardDisplay(card.value)}{SUIT_SYMBOLS[card.suit]}</div>
-        <div className="text-[18px] text-center">{SUIT_SYMBOLS[card.suit]}</div>
-        <div className="rotate-180">{getCardDisplay(card.value)}{SUIT_SYMBOLS[card.suit]}</div>
-      </div>
+        <CardCorner>{getCardDisplay(card.value)}{SUIT_SYMBOLS[card.suit]}</CardCorner>
+        <CardCenter>{SUIT_SYMBOLS[card.suit]}</CardCenter>
+        <CardCorner $rotated>{getCardDisplay(card.value)}{SUIT_SYMBOLS[card.suit]}</CardCorner>
+      </CardFace>
     );
   };
 
   return (
-    <div className="flex flex-col h-full bg-[#008000] p-4" data-testid="solitaire">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-4">
-        <Win95Button onClick={initializeGame} data-testid="button-new-game">New Game</Win95Button>
-        <div className="flex gap-4 text-white text-[12px]">
+    <Container data-testid="solitaire">
+      <Header>
+        <Button onClick={initializeGame} data-testid="button-new-game">New Game</Button>
+        <StatsContainer>
           <span data-testid="text-moves">Moves: {moves}</span>
           <span data-testid="text-time">Time: {formatTime(time)}</span>
-        </div>
-      </div>
+        </StatsContainer>
+      </Header>
 
-      {/* Top row: Stock, Waste, and Foundations */}
-      <div className="flex justify-between mb-4">
-        <div className="flex gap-2">
-          {/* Stock */}
+      <TopRow>
+        <StockWasteContainer>
           <div onClick={drawFromStock} data-testid="stock-pile">
             {stock.length > 0 ? (
-              <CardComponent card={{ ...stock[stock.length - 1], faceUp: false }} />
+              <CardBack />
             ) : (
-              <div className="w-[50px] h-[70px] rounded-sm border-2 border-dashed border-white/30 flex items-center justify-center text-white cursor-pointer">
-                ↻
-              </div>
+              <CardSlot $dashed>R</CardSlot>
             )}
           </div>
-          {/* Waste */}
           <div data-testid="waste-pile">
             {waste.length > 0 ? (
               <CardComponent
@@ -260,13 +362,12 @@ export default function Solitaire() {
                 isSelected={selectedCards?.source === 'waste'}
               />
             ) : (
-              <CardComponent card={null} />
+              <CardSlot />
             )}
           </div>
-        </div>
+        </StockWasteContainer>
 
-        {/* Foundations */}
-        <div className="flex gap-2">
+        <FoundationsContainer>
           {foundations.map((foundation, i) => (
             <div
               key={i}
@@ -279,26 +380,22 @@ export default function Solitaire() {
                   isSelected={selectedCards?.source === `foundation${i}`}
                 />
               ) : (
-                <div className="w-[50px] h-[70px] rounded-sm border-2 border-dashed border-white/30 flex items-center justify-center text-white/50 text-[20px]">
-                  {SUIT_SYMBOLS[SUITS[i]]}
-                </div>
+                <CardSlot $dashed>{SUIT_SYMBOLS[SUITS[i]]}</CardSlot>
               )}
             </div>
           ))}
-        </div>
-      </div>
+        </FoundationsContainer>
+      </TopRow>
 
-      {/* Tableau */}
-      <div className="flex gap-2 flex-1">
+      <TableauContainer>
         {tableau.map((pile, pileIndex) => (
-          <div
+          <TableauPile
             key={pileIndex}
-            className="relative flex-1 min-w-[50px]"
             onClick={() => pile.length === 0 && handleCardClick(`tableau${pileIndex}`, [], pileIndex)}
             data-testid={`tableau-${pileIndex}`}
           >
             {pile.length === 0 ? (
-              <CardComponent card={null} />
+              <CardSlot />
             ) : (
               pile.map((card, cardIndex) => {
                 const isTopCard = cardIndex === pile.length - 1;
@@ -306,35 +403,30 @@ export default function Solitaire() {
                 const isSelectable = card.faceUp && faceUpCards.length > 0;
 
                 return (
-                  <div
-                    key={cardIndex}
-                    className="absolute"
-                    style={{ top: cardIndex * 20 }}
-                  >
+                  <StackedCard key={cardIndex} $offset={cardIndex}>
                     <CardComponent
                       card={card}
                       onClick={() => isSelectable && handleCardClick(`tableau${pileIndex}`, pile.slice(cardIndex), pileIndex)}
                       onDoubleClick={() => isTopCard && card.faceUp && handleDoubleClick(`tableau${pileIndex}`, card, pileIndex)}
                       isSelected={selectedCards?.source === `tableau${pileIndex}` && selectedCards.cards.includes(card)}
                     />
-                  </div>
+                  </StackedCard>
                 );
               })
             )}
-          </div>
+          </TableauPile>
         ))}
-      </div>
+      </TableauContainer>
 
-      {/* Win message */}
       {gameState === 'won' && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="win95-window p-4 text-center">
-            <h2 className="text-[16px] font-bold mb-2">Congratulations!</h2>
-            <p className="text-[12px] mb-4">You won in {moves} moves and {formatTime(time)}!</p>
-            <Win95Button onClick={initializeGame}>Play Again</Win95Button>
-          </div>
-        </div>
+        <WinOverlay>
+          <WinDialog variant="outside">
+            <h2 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '8px' }}>Congratulations!</h2>
+            <p style={{ fontSize: '12px', marginBottom: '16px' }}>You won in {moves} moves and {formatTime(time)}!</p>
+            <Button onClick={initializeGame}>Play Again</Button>
+          </WinDialog>
+        </WinOverlay>
       )}
-    </div>
+    </Container>
   );
 }

@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
-import Win95Button from './Win95Button';
+import { Button, Panel } from 'react95';
+import styled from 'styled-components';
 
 type CellState = {
   isMine: boolean;
@@ -18,6 +19,104 @@ const DIFFICULTIES: Record<Difficulty, { rows: number; cols: number; mines: numb
 };
 
 const NUMBER_COLORS = ['', '#0000FF', '#008000', '#FF0000', '#000080', '#800000', '#008080', '#000000', '#808080'];
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  background: #c0c0c0;
+`;
+
+const DifficultyRow = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+`;
+
+const DifficultyButton = styled(Button)<{ $active?: boolean }>`
+  font-size: 10px;
+  min-width: 70px;
+  ${props => props.$active && `
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
+  `}
+`;
+
+const GameContainer = styled(Panel)`
+  padding: 4px;
+`;
+
+const Header = styled(Panel)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px;
+  margin-bottom: 4px;
+`;
+
+const Counter = styled.div`
+  background: black;
+  color: #ff0000;
+  font-family: monospace;
+  font-size: 20px;
+  padding: 0 4px;
+  width: 50px;
+  text-align: center;
+`;
+
+const FaceButton = styled(Button)`
+  width: 30px;
+  height: 30px;
+  min-width: 0;
+  padding: 0;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const GridContainer = styled(Panel)`
+  padding: 1px;
+  display: inline-block;
+`;
+
+const GridRow = styled.div`
+  display: flex;
+`;
+
+const Cell = styled.button<{ $revealed?: boolean; $exploded?: boolean }>`
+  width: 16px;
+  height: 16px;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: ${props => props.$revealed ? '#c0c0c0' : '#c0c0c0'};
+  ${props => props.$revealed ? `
+    border: 1px solid #808080;
+  ` : `
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-bottom: 2px solid #808080;
+    border-right: 2px solid #808080;
+  `}
+  ${props => props.$exploded && `
+    background: #ff0000;
+  `}
+  &:disabled {
+    cursor: default;
+  }
+`;
+
+const GameStatus = styled.div`
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: bold;
+`;
 
 export default function Minesweeper() {
   const [difficulty, setDifficulty] = useState<Difficulty>('beginner');
@@ -160,78 +259,69 @@ export default function Minesweeper() {
     setMineCount(prev => newGrid[r][c].isFlagged ? prev - 1 : prev + 1);
   };
 
-  const getFaceEmoji = () => {
-    if (gameState === 'won') return '😎';
-    if (gameState === 'lost') return '😵';
-    if (isMouseDown) return '😮';
-    return '🙂';
+  const getFaceIcon = () => {
+    if (gameState === 'won') return '8)';
+    if (gameState === 'lost') return 'X(';
+    if (isMouseDown) return ':O';
+    return ':)';
   };
 
   const formatNumber = (n: number) => String(Math.max(0, Math.min(999, n))).padStart(3, '0');
 
   return (
-    <div className="flex flex-col items-center p-2 bg-[#c0c0c0]" data-testid="minesweeper">
-      {/* Difficulty selector */}
-      <div className="flex gap-2 mb-2">
+    <Container data-testid="minesweeper">
+      <DifficultyRow>
         {(['beginner', 'intermediate', 'expert'] as Difficulty[]).map(d => (
-          <Win95Button
+          <DifficultyButton
             key={d}
-            pressed={difficulty === d}
+            $active={difficulty === d}
             onClick={() => { setDifficulty(d); }}
-            className="text-[10px] min-w-[70px]"
             data-testid={`button-difficulty-${d}`}
           >
             {d.charAt(0).toUpperCase() + d.slice(1)}
-          </Win95Button>
+          </DifficultyButton>
         ))}
-      </div>
+      </DifficultyRow>
 
-      {/* Game container */}
-      <div className="win95-raised p-1">
-        {/* Header */}
-        <div className="win95-sunken flex items-center justify-between p-1 mb-1">
-          <div className="bg-black text-red-500 font-mono text-[20px] px-1 w-[50px] text-center" data-testid="text-mine-count">
+      <GameContainer variant="outside">
+        <Header variant="well">
+          <Counter data-testid="text-mine-count">
             {formatNumber(mineCount)}
-          </div>
-          <button
-            className="win95-button w-[30px] h-[30px] min-w-0 p-0 text-[20px] flex items-center justify-center"
+          </Counter>
+          <FaceButton
             onClick={initializeGrid}
             onMouseDown={() => setIsMouseDown(true)}
             onMouseUp={() => setIsMouseDown(false)}
             onMouseLeave={() => setIsMouseDown(false)}
             data-testid="button-new-game"
           >
-            {getFaceEmoji()}
-          </button>
-          <div className="bg-black text-red-500 font-mono text-[20px] px-1 w-[50px] text-center" data-testid="text-timer">
+            {getFaceIcon()}
+          </FaceButton>
+          <Counter data-testid="text-timer">
             {formatNumber(time)}
-          </div>
-        </div>
+          </Counter>
+        </Header>
 
-        {/* Grid */}
-        <div
-          className="win95-sunken p-[1px] inline-block"
+        <GridContainer
+          variant="well"
           onMouseDown={() => setIsMouseDown(true)}
           onMouseUp={() => setIsMouseDown(false)}
           onMouseLeave={() => setIsMouseDown(false)}
         >
           {grid.map((row, r) => (
-            <div key={r} className="flex">
+            <GridRow key={r}>
               {row.map((cell, c) => (
-                <button
+                <Cell
                   key={c}
-                  className={`w-[16px] h-[16px] text-[11px] font-bold flex items-center justify-center border-0 p-0 ${
-                    cell.isRevealed
-                      ? 'bg-[#c0c0c0] border border-[#808080]'
-                      : 'win95-raised'
-                  } ${cell.isRevealed && cell.isMine && gameState === 'lost' ? 'bg-red-500' : ''}`}
+                  $revealed={cell.isRevealed}
+                  $exploded={cell.isRevealed && cell.isMine && gameState === 'lost'}
                   onClick={() => handleCellClick(r, c)}
                   onContextMenu={(e) => handleRightClick(e, r, c)}
                   disabled={gameState !== 'playing'}
                   data-testid={`cell-${r}-${c}`}
                 >
                   {cell.isRevealed ? (
-                    cell.isMine ? '💣' : (
+                    cell.isMine ? '*' : (
                       cell.adjacentMines > 0 ? (
                         <span style={{ color: NUMBER_COLORS[cell.adjacentMines] }}>
                           {cell.adjacentMines}
@@ -239,21 +329,20 @@ export default function Minesweeper() {
                       ) : ''
                     )
                   ) : (
-                    cell.isFlagged ? '🚩' : ''
+                    cell.isFlagged ? 'F' : ''
                   )}
-                </button>
+                </Cell>
               ))}
-            </div>
+            </GridRow>
           ))}
-        </div>
-      </div>
+        </GridContainer>
+      </GameContainer>
 
-      {/* Game status */}
       {gameState !== 'playing' && (
-        <div className="mt-2 text-[12px] font-bold" data-testid="text-game-status">
+        <GameStatus data-testid="text-game-status">
           {gameState === 'won' ? 'You Win!' : 'Game Over!'}
-        </div>
+        </GameStatus>
       )}
-    </div>
+    </Container>
   );
 }

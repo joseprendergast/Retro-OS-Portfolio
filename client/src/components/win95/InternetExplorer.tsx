@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import Win95Button from './Win95Button';
+import { Button, Toolbar, Panel } from 'react95';
+import styled from 'styled-components';
 
 interface BlogPost {
   id: string;
@@ -61,6 +62,130 @@ This portfolio is one such project!`,
   },
 ];
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+`;
+
+const ToolbarContainer = styled(Toolbar)`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+`;
+
+const NavButton = styled(Button)`
+  font-size: 11px;
+  padding: 2px 8px;
+`;
+
+const AddressBar = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  background: #c0c0c0;
+  border-bottom: 1px solid #808080;
+`;
+
+const AddressLabel = styled.span`
+  font-size: 11px;
+`;
+
+const AddressInput = styled(Panel)`
+  flex: 1;
+  background: white;
+  padding: 2px 8px;
+  font-size: 11px;
+`;
+
+const Content = styled.div`
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+`;
+
+const ArticleTitle = styled.h1`
+  font-size: 18px;
+  font-weight: bold;
+  color: #000080;
+  margin-bottom: 8px;
+`;
+
+const ArticleDate = styled.p`
+  font-size: 11px;
+  color: #808080;
+  margin-bottom: 16px;
+`;
+
+const ArticleContent = styled.div`
+  font-size: 12px;
+  white-space: pre-line;
+`;
+
+const BackLink = styled.button`
+  margin-top: 16px;
+  color: #0000ff;
+  text-decoration: underline;
+  font-size: 12px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+`;
+
+const BlogTitle = styled.h1`
+  font-size: 20px;
+  font-weight: bold;
+  color: #000080;
+  margin-bottom: 16px;
+`;
+
+const BlogIntro = styled.p`
+  font-size: 12px;
+  margin-bottom: 16px;
+`;
+
+const PostList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const PostItem = styled.div`
+  border-bottom: 1px solid #c0c0c0;
+  padding-bottom: 16px;
+`;
+
+const PostTitle = styled.h2`
+  font-size: 14px;
+  font-weight: bold;
+  color: #0000ff;
+  cursor: pointer;
+  text-decoration: underline;
+`;
+
+const PostDate = styled.p`
+  font-size: 10px;
+  color: #808080;
+`;
+
+const PostSummary = styled.p`
+  font-size: 11px;
+  margin-top: 4px;
+`;
+
+const StatusBar = styled(Panel)`
+  height: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 10px;
+  background: #c0c0c0;
+`;
+
 export default function InternetExplorer() {
   const [currentUrl, setCurrentUrl] = useState('http://www.myportfolio.com/');
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
@@ -110,73 +235,61 @@ export default function InternetExplorer() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white" data-testid="internet-explorer">
-      {/* Toolbar */}
-      <div className="flex items-center gap-1 p-1 bg-[#c0c0c0] border-b border-[#808080]">
-        <Win95Button small onClick={goBack} disabled={historyIndex === 0} data-testid="button-ie-back">
-          ← Back
-        </Win95Button>
-        <Win95Button small onClick={goForward} disabled={historyIndex >= history.length - 1} data-testid="button-ie-forward">
-          → Forward
-        </Win95Button>
-        <Win95Button small onClick={goHome} data-testid="button-ie-home">
-          🏠 Home
-        </Win95Button>
-        <Win95Button small onClick={() => window.location.reload()} data-testid="button-ie-refresh">
-          🔄 Refresh
-        </Win95Button>
-      </div>
+    <Container data-testid="internet-explorer">
+      <ToolbarContainer>
+        <NavButton onClick={goBack} disabled={historyIndex === 0} data-testid="button-ie-back">
+          Back
+        </NavButton>
+        <NavButton onClick={goForward} disabled={historyIndex >= history.length - 1} data-testid="button-ie-forward">
+          Forward
+        </NavButton>
+        <NavButton onClick={goHome} data-testid="button-ie-home">
+          Home
+        </NavButton>
+        <NavButton onClick={() => window.location.reload()} data-testid="button-ie-refresh">
+          Refresh
+        </NavButton>
+      </ToolbarContainer>
 
-      {/* Address bar */}
-      <div className="flex items-center gap-2 p-1 bg-[#c0c0c0] border-b border-[#808080]">
-        <span className="text-[11px]">Address:</span>
-        <div className="win95-sunken flex-1 bg-white px-2 py-[2px] text-[11px]" data-testid="text-url">
+      <AddressBar>
+        <AddressLabel>Address:</AddressLabel>
+        <AddressInput variant="well" data-testid="text-url">
           {currentUrl}
-        </div>
-      </div>
+        </AddressInput>
+      </AddressBar>
 
-      {/* Content */}
-      <div className="flex-1 overflow-auto p-4">
+      <Content>
         {selectedPost ? (
           <article>
-            <h1 className="text-[18px] font-bold text-[#000080] mb-2">{selectedPost.title}</h1>
-            <p className="text-[11px] text-[#808080] mb-4">{selectedPost.date}</p>
-            <div className="text-[12px] whitespace-pre-line">{selectedPost.content}</div>
-            <button
-              className="mt-4 text-[#0000FF] underline text-[12px] cursor-pointer"
-              onClick={goHome}
-              data-testid="link-back-to-home"
-            >
-              ← Back to articles
-            </button>
+            <ArticleTitle>{selectedPost.title}</ArticleTitle>
+            <ArticleDate>{selectedPost.date}</ArticleDate>
+            <ArticleContent>{selectedPost.content}</ArticleContent>
+            <BackLink onClick={goHome} data-testid="link-back-to-home">
+              Back to articles
+            </BackLink>
           </article>
         ) : (
           <div>
-            <h1 className="text-[20px] font-bold text-[#000080] mb-4">My Portfolio Blog</h1>
-            <p className="text-[12px] mb-4">Welcome! Here are my latest articles:</p>
-            <div className="space-y-4">
+            <BlogTitle>My Portfolio Blog</BlogTitle>
+            <BlogIntro>Welcome! Here are my latest articles:</BlogIntro>
+            <PostList>
               {BLOG_POSTS.map((post) => (
-                <div key={post.id} className="border-b border-[#c0c0c0] pb-4">
-                  <h2
-                    className="text-[14px] font-bold text-[#0000FF] cursor-pointer underline"
-                    onClick={() => openPost(post)}
-                    data-testid={`link-post-${post.id}`}
-                  >
+                <PostItem key={post.id}>
+                  <PostTitle onClick={() => openPost(post)} data-testid={`link-post-${post.id}`}>
                     {post.title}
-                  </h2>
-                  <p className="text-[10px] text-[#808080]">{post.date}</p>
-                  <p className="text-[11px] mt-1">{post.summary}</p>
-                </div>
+                  </PostTitle>
+                  <PostDate>{post.date}</PostDate>
+                  <PostSummary>{post.summary}</PostSummary>
+                </PostItem>
               ))}
-            </div>
+            </PostList>
           </div>
         )}
-      </div>
+      </Content>
 
-      {/* Status bar */}
-      <div className="h-[20px] win95-sunken flex items-center px-2 text-[10px] bg-[#c0c0c0]">
+      <StatusBar variant="well">
         Done
-      </div>
-    </div>
+      </StatusBar>
+    </Container>
   );
 }

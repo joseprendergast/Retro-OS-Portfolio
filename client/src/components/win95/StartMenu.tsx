@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { cn } from '@/lib/utils';
+import { MenuList, MenuListItem, Separator } from 'react95';
+import styled from 'styled-components';
 import { useDesktopStore } from '@/lib/desktopStore';
 
 export interface MenuItem {
@@ -16,6 +17,73 @@ interface StartMenuProps {
   onItemClick: (item: MenuItem) => void;
 }
 
+const StartMenuContainer = styled.div`
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  z-index: 9998;
+  display: flex;
+`;
+
+const SideBanner = styled.div`
+  width: 24px;
+  background: linear-gradient(to top, #000080, #1084d0);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+`;
+
+const BannerText = styled.span`
+  color: white;
+  font-weight: bold;
+  font-size: 11px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+`;
+
+const MenuContainer = styled(MenuList)`
+  min-width: 180px;
+`;
+
+const StyledMenuItem = styled(MenuListItem)<{ $hasSubmenu?: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 11px;
+  position: relative;
+  padding: 4px 16px;
+`;
+
+const IconSpan = styled.span`
+  font-size: 16px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+`;
+
+const SubmenuArrow = styled.span`
+  font-size: 10px;
+  margin-left: auto;
+`;
+
+const SubmenuContainer = styled(MenuList)`
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 150px;
+  z-index: 50;
+`;
+
+const SubSubmenuContainer = styled(MenuList)`
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 120px;
+  z-index: 51;
+`;
+
 export default function StartMenu({ items, onItemClick }: StartMenuProps) {
   const { startMenuOpen, closeStartMenu } = useDesktopStore();
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -31,28 +99,20 @@ export default function StartMenu({ items, onItemClick }: StartMenuProps) {
   };
 
   return (
-    <div
-      className="fixed bottom-[30px] left-0 win95-raised bg-[#c0c0c0] z-[9998] flex"
+    <StartMenuContainer
       data-testid="start-menu"
       onClick={(e) => e.stopPropagation()}
     >
-      {/* Windows 95 Side Banner */}
-      <div className="w-[24px] bg-gradient-to-t from-[#000080] to-[#1084d0] flex items-end justify-center pb-2">
-        <span className="text-white font-bold text-[11px] writing-mode-vertical rotate-180" style={{ writingMode: 'vertical-rl' }}>
-          Windows 95
-        </span>
-      </div>
+      <SideBanner>
+        <BannerText>Windows 95</BannerText>
+      </SideBanner>
 
-      {/* Menu Items */}
-      <div className="min-w-[180px]">
-        {items.map((item, index) => (
+      <MenuContainer>
+        {items.map((item) => (
           <div key={item.id}>
-            {item.separator && <div className="h-[1px] bg-[#808080] mx-1 my-1 shadow-[0_1px_0_#ffffff]" />}
-            <div
-              className={cn(
-                'relative flex items-center gap-2 px-4 py-1 cursor-pointer',
-                activeSubmenu === item.id && 'bg-[#000080] text-white'
-              )}
+            {item.separator && <Separator />}
+            <StyledMenuItem
+              $hasSubmenu={!!item.submenu}
               onMouseEnter={() => {
                 setActiveSubmenu(item.id);
                 setActiveSubSubmenu(null);
@@ -60,22 +120,18 @@ export default function StartMenu({ items, onItemClick }: StartMenuProps) {
               onClick={() => handleItemClick(item)}
               data-testid={`start-menu-item-${item.id}`}
             >
-              <span className="text-[16px] w-[20px]">{item.icon}</span>
-              <span className="flex-1 text-[11px]">{item.label}</span>
-              {item.submenu && <span className="text-[10px]">▶</span>}
+              <IconSpan>{item.icon}</IconSpan>
+              <span style={{ flex: 1 }}>{item.label}</span>
+              {item.submenu && <SubmenuArrow>▶</SubmenuArrow>}
 
-              {/* First Level Submenu */}
               {item.submenu && activeSubmenu === item.id && (
-                <div className="absolute left-full top-0 win95-raised bg-[#c0c0c0] min-w-[150px] z-50">
+                <SubmenuContainer>
                   {item.submenu.map((subItem) => (
-                    <div
+                    <StyledMenuItem
                       key={subItem.id}
-                      className={cn(
-                        'relative flex items-center gap-2 px-4 py-1 cursor-pointer text-black',
-                        activeSubSubmenu === subItem.id && 'bg-[#000080] text-white'
-                      )}
+                      $hasSubmenu={!!subItem.submenu}
                       onMouseEnter={() => setActiveSubSubmenu(subItem.id)}
-                      onClick={(e) => {
+                      onClick={(e: React.MouseEvent) => {
                         e.stopPropagation();
                         if (!subItem.submenu) {
                           onItemClick(subItem);
@@ -84,38 +140,36 @@ export default function StartMenu({ items, onItemClick }: StartMenuProps) {
                       }}
                       data-testid={`start-submenu-item-${subItem.id}`}
                     >
-                      <span className="text-[16px] w-[20px]">{subItem.icon}</span>
-                      <span className="flex-1 text-[11px]">{subItem.label}</span>
-                      {subItem.submenu && <span className="text-[10px]">▶</span>}
+                      <IconSpan>{subItem.icon}</IconSpan>
+                      <span style={{ flex: 1 }}>{subItem.label}</span>
+                      {subItem.submenu && <SubmenuArrow>▶</SubmenuArrow>}
 
-                      {/* Second Level Submenu */}
                       {subItem.submenu && activeSubSubmenu === subItem.id && (
-                        <div className="absolute left-full top-0 win95-raised bg-[#c0c0c0] min-w-[120px] z-50">
+                        <SubSubmenuContainer>
                           {subItem.submenu.map((subSubItem) => (
-                            <div
+                            <StyledMenuItem
                               key={subSubItem.id}
-                              className="flex items-center gap-2 px-4 py-1 cursor-pointer text-black hover:bg-[#000080] hover:text-white"
-                              onClick={(e) => {
+                              onClick={(e: React.MouseEvent) => {
                                 e.stopPropagation();
                                 onItemClick(subSubItem);
                                 closeStartMenu();
                               }}
                               data-testid={`start-subsubmenu-item-${subSubItem.id}`}
                             >
-                              <span className="text-[16px] w-[20px]">{subSubItem.icon}</span>
-                              <span className="text-[11px]">{subSubItem.label}</span>
-                            </div>
+                              <IconSpan>{subSubItem.icon}</IconSpan>
+                              <span>{subSubItem.label}</span>
+                            </StyledMenuItem>
                           ))}
-                        </div>
+                        </SubSubmenuContainer>
                       )}
-                    </div>
+                    </StyledMenuItem>
                   ))}
-                </div>
+                </SubmenuContainer>
               )}
-            </div>
+            </StyledMenuItem>
           </div>
         ))}
-      </div>
-    </div>
+      </MenuContainer>
+    </StartMenuContainer>
   );
 }

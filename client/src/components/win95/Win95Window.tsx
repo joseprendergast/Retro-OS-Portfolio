@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import { cn } from '@/lib/utils';
+import { Window, WindowHeader, WindowContent, Button, Toolbar, MenuList, MenuListItem } from 'react95';
+import styled from 'styled-components';
 import { useWindowManager, WindowState } from '@/lib/windowManager';
 
 interface Win95WindowProps {
@@ -8,6 +9,130 @@ interface Win95WindowProps {
   menuItems?: { label: string; items?: { label: string; action?: () => void }[] }[];
   statusText?: string;
 }
+
+const StyledWindow = styled(Window)<{ $isMaximized?: boolean }>`
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  ${props => props.$isMaximized && 'border: 0;'}
+`;
+
+const TitleBar = styled(WindowHeader)<{ $isActive?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 20px;
+  padding: 2px 4px;
+  user-select: none;
+  background: ${props => props.$isActive 
+    ? 'linear-gradient(to right, #000080, #1084d0)' 
+    : 'linear-gradient(to right, #808080, #c0c0c0)'};
+`;
+
+const TitleContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+`;
+
+const TitleIcon = styled.span`
+  font-size: 14px;
+`;
+
+const TitleText = styled.span`
+  font-size: 11px;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const WindowControls = styled.div`
+  display: flex;
+  gap: 2px;
+`;
+
+const ControlButton = styled(Button)`
+  width: 16px;
+  height: 14px;
+  min-width: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  line-height: 1;
+`;
+
+const MenuBar = styled(Toolbar)`
+  height: 20px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+`;
+
+const MenuButton = styled.button<{ $isOpen?: boolean }>`
+  padding: 2px 8px;
+  font-size: 11px;
+  border: none;
+  background: ${props => props.$isOpen ? '#000080' : 'transparent'};
+  color: ${props => props.$isOpen ? 'white' : 'inherit'};
+  cursor: pointer;
+  
+  &:hover {
+    background: #000080;
+    color: white;
+  }
+`;
+
+const DropdownMenu = styled(MenuList)`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 50;
+  min-width: 120px;
+`;
+
+const StyledMenuItem = styled(MenuListItem)`
+  font-size: 11px;
+  padding: 4px 16px;
+`;
+
+const ContentArea = styled(WindowContent)`
+  flex: 1;
+  overflow: auto;
+  background: white;
+  padding: 0;
+`;
+
+const StatusBar = styled.div`
+  height: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 11px;
+  background: #c0c0c0;
+  border-top: 1px solid #808080;
+  box-shadow: inset 0 1px 0 #ffffff;
+`;
+
+const ResizeHandle = styled.div<{ $position: string }>`
+  position: absolute;
+  ${props => {
+    switch (props.$position) {
+      case 'n': return 'top: -4px; left: 8px; right: 8px; height: 8px; cursor: n-resize;';
+      case 's': return 'bottom: -4px; left: 8px; right: 8px; height: 8px; cursor: s-resize;';
+      case 'w': return 'left: -4px; top: 8px; bottom: 8px; width: 8px; cursor: w-resize;';
+      case 'e': return 'right: -4px; top: 8px; bottom: 8px; width: 8px; cursor: e-resize;';
+      case 'nw': return 'top: -4px; left: -4px; width: 12px; height: 12px; cursor: nw-resize;';
+      case 'ne': return 'top: -4px; right: -4px; width: 12px; height: 12px; cursor: ne-resize;';
+      case 'sw': return 'bottom: -4px; left: -4px; width: 12px; height: 12px; cursor: sw-resize;';
+      case 'se': return 'bottom: -4px; right: -4px; width: 12px; height: 12px; cursor: se-resize;';
+      default: return '';
+    }
+  }}
+`;
 
 export default function Win95Window({
   window: win,
@@ -130,111 +255,93 @@ export default function Win95Window({
     : { left: win.x, top: win.y, width: win.width, height: win.height };
 
   return (
-    <div
+    <StyledWindow
       ref={windowRef}
-      className={cn(
-        'win95-window fixed flex flex-col',
-        win.isMaximized && 'border-0'
-      )}
+      $isMaximized={win.isMaximized}
       style={{ ...windowStyle, zIndex: win.zIndex }}
       onClick={() => focusWindow(win.id)}
       data-testid={`window-${win.id}`}
     >
-      {/* Resize handles */}
       {!win.isMaximized && (
         <>
-          <div className="absolute -top-1 left-2 right-2 h-2 cursor-n-resize" onMouseDown={handleResizeMouseDown('n')} />
-          <div className="absolute -bottom-1 left-2 right-2 h-2 cursor-s-resize" onMouseDown={handleResizeMouseDown('s')} />
-          <div className="absolute top-2 -left-1 bottom-2 w-2 cursor-w-resize" onMouseDown={handleResizeMouseDown('w')} />
-          <div className="absolute top-2 -right-1 bottom-2 w-2 cursor-e-resize" onMouseDown={handleResizeMouseDown('e')} />
-          <div className="absolute -top-1 -left-1 w-3 h-3 cursor-nw-resize" onMouseDown={handleResizeMouseDown('nw')} />
-          <div className="absolute -top-1 -right-1 w-3 h-3 cursor-ne-resize" onMouseDown={handleResizeMouseDown('ne')} />
-          <div className="absolute -bottom-1 -left-1 w-3 h-3 cursor-sw-resize" onMouseDown={handleResizeMouseDown('sw')} />
-          <div className="absolute -bottom-1 -right-1 w-3 h-3 cursor-se-resize" onMouseDown={handleResizeMouseDown('se')} />
+          <ResizeHandle $position="n" onMouseDown={handleResizeMouseDown('n')} />
+          <ResizeHandle $position="s" onMouseDown={handleResizeMouseDown('s')} />
+          <ResizeHandle $position="w" onMouseDown={handleResizeMouseDown('w')} />
+          <ResizeHandle $position="e" onMouseDown={handleResizeMouseDown('e')} />
+          <ResizeHandle $position="nw" onMouseDown={handleResizeMouseDown('nw')} />
+          <ResizeHandle $position="ne" onMouseDown={handleResizeMouseDown('ne')} />
+          <ResizeHandle $position="sw" onMouseDown={handleResizeMouseDown('sw')} />
+          <ResizeHandle $position="se" onMouseDown={handleResizeMouseDown('se')} />
         </>
       )}
 
-      {/* Title Bar */}
-      <div
-        className={cn(
-          'h-[20px] flex items-center justify-between shrink-0 select-none',
-          isActive ? 'win95-title-active' : 'win95-title-inactive'
-        )}
+      <TitleBar
+        $isActive={isActive}
         onMouseDown={handleTitleMouseDown}
         onDoubleClick={handleTitleDoubleClick}
       >
-        <div className="flex items-center gap-1 overflow-hidden">
-          <span className="text-[14px]">{win.icon}</span>
-          <span className="truncate text-[11px]">{win.title}</span>
-        </div>
-        <div className="flex gap-[2px]">
-          <button
-            className="win95-button w-[16px] h-[14px] min-w-0 p-0 flex items-center justify-center text-[10px] leading-none"
-            onClick={(e) => { e.stopPropagation(); minimizeWindow(win.id); }}
+        <TitleContent>
+          <TitleIcon>{win.icon}</TitleIcon>
+          <TitleText>{win.title}</TitleText>
+        </TitleContent>
+        <WindowControls>
+          <ControlButton
+            onClick={(e: React.MouseEvent) => { e.stopPropagation(); minimizeWindow(win.id); }}
             data-testid={`button-minimize-${win.id}`}
           >
             _
-          </button>
-          <button
-            className="win95-button w-[16px] h-[14px] min-w-0 p-0 flex items-center justify-center text-[10px] leading-none"
-            onClick={(e) => { e.stopPropagation(); win.isMaximized ? restoreWindow(win.id) : maximizeWindow(win.id); }}
+          </ControlButton>
+          <ControlButton
+            onClick={(e: React.MouseEvent) => { e.stopPropagation(); win.isMaximized ? restoreWindow(win.id) : maximizeWindow(win.id); }}
             data-testid={`button-maximize-${win.id}`}
           >
             {win.isMaximized ? '❐' : '□'}
-          </button>
-          <button
-            className="win95-button w-[16px] h-[14px] min-w-0 p-0 flex items-center justify-center text-[10px] leading-none"
-            onClick={(e) => { e.stopPropagation(); closeWindow(win.id); }}
+          </ControlButton>
+          <ControlButton
+            onClick={(e: React.MouseEvent) => { e.stopPropagation(); closeWindow(win.id); }}
             data-testid={`button-close-${win.id}`}
           >
             ×
-          </button>
-        </div>
-      </div>
+          </ControlButton>
+        </WindowControls>
+      </TitleBar>
 
-      {/* Menu Bar */}
-      <div className="h-[20px] flex items-center bg-[#c0c0c0] shrink-0 relative">
+      <MenuBar>
         {menuItems.map((menu) => (
-          <div key={menu.label} className="relative">
-            <button
-              className={cn(
-                'px-2 py-[2px] text-[11px]',
-                openMenu === menu.label ? 'bg-[#000080] text-white' : 'hover:bg-[#000080] hover:text-white'
-              )}
+          <div key={menu.label} style={{ position: 'relative' }}>
+            <MenuButton
+              $isOpen={openMenu === menu.label}
               onClick={() => setOpenMenu(openMenu === menu.label ? null : menu.label)}
               data-testid={`menu-${menu.label.toLowerCase()}`}
             >
               {menu.label}
-            </button>
+            </MenuButton>
             {openMenu === menu.label && menu.items && menu.items.length > 0 && (
-              <div className="absolute top-full left-0 win95-raised bg-[#c0c0c0] z-50 min-w-[120px]">
+              <DropdownMenu>
                 {menu.items.map((item, i) => (
-                  <button
+                  <StyledMenuItem
                     key={i}
-                    className="block w-full text-left px-4 py-1 text-[11px] win95-menu-item"
                     onClick={() => { item.action?.(); setOpenMenu(null); }}
                     data-testid={`menuitem-${item.label.toLowerCase().replace(/\s/g, '-')}`}
                   >
                     {item.label}
-                  </button>
+                  </StyledMenuItem>
                 ))}
-              </div>
+              </DropdownMenu>
             )}
           </div>
         ))}
-      </div>
+      </MenuBar>
 
-      {/* Content */}
-      <div className="flex-1 overflow-auto bg-white">
+      <ContentArea>
         {children}
-      </div>
+      </ContentArea>
 
-      {/* Status Bar */}
       {statusText !== undefined && (
-        <div className="h-[20px] win95-sunken flex items-center px-2 text-[11px] shrink-0 bg-[#c0c0c0]">
+        <StatusBar>
           {statusText}
-        </div>
+        </StatusBar>
       )}
-    </div>
+    </StyledWindow>
   );
 }

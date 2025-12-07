@@ -1,39 +1,87 @@
 import { useState } from 'react';
-import Win95Button from './Win95Button';
+import { Button, Toolbar, Panel } from 'react95';
+import styled from 'styled-components';
 
 interface ImageViewerProps {
   src: string;
   title: string;
 }
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #c0c0c0;
+`;
+
+const ToolbarContainer = styled(Toolbar)`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+`;
+
+const ZoomButton = styled(Button)`
+  min-width: 24px;
+  height: 22px;
+  padding: 0 4px;
+  font-size: 11px;
+`;
+
+const ZoomText = styled.span`
+  font-size: 11px;
+  min-width: 40px;
+  text-align: center;
+`;
+
+const ImageContainer = styled.div`
+  flex: 1;
+  overflow: auto;
+  background: #808080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+`;
+
+const Image = styled.img<{ $zoom: number }>`
+  max-width: none;
+  transform: scale(${props => props.$zoom / 100});
+  transform-origin: center;
+`;
+
+const StatusBar = styled(Panel)`
+  height: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 10px;
+`;
+
 export default function ImageViewer({ src, title }: ImageViewerProps) {
   const [zoom, setZoom] = useState(100);
 
   return (
-    <div className="flex flex-col h-full bg-[#c0c0c0]" data-testid="image-viewer">
-      {/* Toolbar */}
-      <div className="flex items-center gap-2 p-1 border-b border-[#808080]">
-        <Win95Button small onClick={() => setZoom(z => Math.max(25, z - 25))} data-testid="button-zoom-out">-</Win95Button>
-        <span className="text-[11px] min-w-[40px] text-center">{zoom}%</span>
-        <Win95Button small onClick={() => setZoom(z => Math.min(400, z + 25))} data-testid="button-zoom-in">+</Win95Button>
-        <Win95Button small onClick={() => setZoom(100)} data-testid="button-zoom-reset">Fit</Win95Button>
-      </div>
+    <Container data-testid="image-viewer">
+      <ToolbarContainer>
+        <ZoomButton onClick={() => setZoom(z => Math.max(25, z - 25))} data-testid="button-zoom-out">-</ZoomButton>
+        <ZoomText>{zoom}%</ZoomText>
+        <ZoomButton onClick={() => setZoom(z => Math.min(400, z + 25))} data-testid="button-zoom-in">+</ZoomButton>
+        <ZoomButton onClick={() => setZoom(100)} data-testid="button-zoom-reset">Fit</ZoomButton>
+      </ToolbarContainer>
 
-      {/* Image container */}
-      <div className="flex-1 overflow-auto bg-[#808080] flex items-center justify-center p-4">
-        <img
+      <ImageContainer>
+        <Image
           src={src}
           alt={title}
-          style={{ transform: `scale(${zoom / 100})`, transformOrigin: 'center' }}
-          className="max-w-none"
+          $zoom={zoom}
           data-testid="img-viewer-content"
         />
-      </div>
+      </ImageContainer>
 
-      {/* Status bar */}
-      <div className="h-[20px] win95-sunken flex items-center px-2 text-[10px]">
+      <StatusBar variant="well">
         {title}
-      </div>
-    </div>
+      </StatusBar>
+    </Container>
   );
 }

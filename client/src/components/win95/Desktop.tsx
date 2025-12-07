@@ -29,15 +29,13 @@ import ageOfEmpiresImage from '@assets/stock_images/age_of_empires_medie_e79e2e8
 import finalFantasyImage from '@assets/stock_images/final_fantasy_fantas_de799221.jpg';
 
 const DESKTOP_ICONS = [
-  { id: 'my-computer', label: 'My Computer', icon: '🖥️', component: 'MyComputer' },
+  { id: 'my-computer', label: 'My Computer', icon: '💻', component: 'MyComputer' },
   { id: 'internet-explorer', label: 'Internet Explorer', icon: '🌐', component: 'InternetExplorer' },
-  { id: 'recycle-bin', label: 'Recycle Bin', icon: '🗑️', component: 'RecycleBin' },
-  { id: 'photos', label: 'Photos', icon: '🖼️', component: 'Photos' },
+  { id: 'recycle-bin', label: 'Recycle Bin', icon: '🗑', component: 'RecycleBin' },
+  { id: 'photos', label: 'Photos', icon: '🖼', component: 'Photos' },
   { id: 'games', label: 'Games', icon: '🎮', component: 'Games' },
-  { id: 'network', label: 'Network', icon: '🌍', component: 'Network' },
-  { id: 'youtube', label: 'YouTube', icon: '📺', isShortcut: true, url: 'https://youtube.com' },
-  { id: 'linkedin', label: 'LinkedIn', icon: '💼', isShortcut: true, url: 'https://linkedin.com' },
-  { id: 'newsletter', label: 'Newsletter', icon: '✉️', isShortcut: true, component: 'Newsletter' },
+  { id: 'experience', label: 'Experience', icon: '📋', component: 'Experience' },
+  { id: 'newsletter', label: 'Newsletter', icon: '📧', isShortcut: true, component: 'Newsletter' },
   { id: 'twitter', label: 'Twitter', icon: '🐦', isShortcut: true, url: 'https://twitter.com' },
 ];
 
@@ -63,21 +61,21 @@ const MY_COMPUTER_FILES: FileItem[] = [
       },
     ],
   },
-  { id: 'my-pictures', name: 'My Pictures', icon: '🖼️', type: 'folder', children: [] },
+  { id: 'my-pictures', name: 'My Pictures', icon: '🖼', type: 'folder', children: [] },
   { id: 'my-music', name: 'My Music', icon: '🎵', type: 'folder', children: [] },
 ];
 
 const PHOTOS_FILES: FileItem[] = [
-  { id: 'crt', name: 'CRT_Computer.png', icon: '🖼️', type: 'file' },
-  { id: 'floppy', name: 'Floppy_Disks.png', icon: '🖼️', type: 'file' },
-  { id: 'cdrom', name: 'CD_Collection.png', icon: '🖼️', type: 'file' },
-  { id: 'modem', name: 'Dial_Up_Modem.png', icon: '🖼️', type: 'file' },
-  { id: 'pixel', name: 'Pixel_Art.png', icon: '🖼️', type: 'file' },
+  { id: 'crt', name: 'CRT_Computer.png', icon: '🖼', type: 'file' },
+  { id: 'floppy', name: 'Floppy_Disks.png', icon: '🖼', type: 'file' },
+  { id: 'cdrom', name: 'CD_Collection.png', icon: '🖼', type: 'file' },
+  { id: 'modem', name: 'Dial_Up_Modem.png', icon: '🖼', type: 'file' },
+  { id: 'pixel', name: 'Pixel_Art.png', icon: '🖼', type: 'file' },
 ];
 
 const RECYCLE_BIN_FILES: FileItem[] = [
   { id: 'old-resume', name: 'old_resume_draft.doc', icon: '📄', type: 'file' },
-  { id: 'cringe', name: 'cringe_photo.bmp', icon: '🖼️', type: 'file' },
+  { id: 'cringe', name: 'cringe_photo.bmp', icon: '🖼', type: 'file' },
   { id: 'test', name: 'test_file.txt', icon: '📝', type: 'file' },
 ];
 
@@ -98,13 +96,6 @@ const GAME_IMAGES: Record<string, string> = {
   'age-of-empires': ageOfEmpiresImage,
   'final-fantasy': finalFantasyImage,
 };
-
-const NETWORK_FILES: FileItem[] = [
-  { id: 'youtube-url', name: 'YouTube.url', icon: '📺', type: 'shortcut' },
-  { id: 'linkedin-url', name: 'LinkedIn.url', icon: '💼', type: 'shortcut' },
-  { id: 'twitter-url', name: 'Twitter.url', icon: '🐦', type: 'shortcut' },
-  { id: 'newsletter-url', name: 'Newsletter.url', icon: '✉️', type: 'shortcut' },
-];
 
 const FILE_CONTENTS: Record<string, string> = {
   'resume': `JOHN DOE
@@ -151,6 +142,45 @@ Feel free to explore this desktop and discover
 all the easter eggs hidden throughout!
 
 Thanks for visiting!`,
+
+  'experience': `MY PROFESSIONAL EXPERIENCE
+===========================
+
+SENIOR SOFTWARE DEVELOPER
+Tech Company Inc. | 2020 - Present
+---------------------------------
+- Lead development of enterprise web applications
+- Architect scalable solutions using React and Node.js
+- Mentor team of 5 junior developers
+- Reduced load times by 40% through optimization
+- Implemented CI/CD pipelines
+
+SOFTWARE DEVELOPER
+Startup Innovation Labs | 2017 - 2020
+--------------------------------------
+- Built full-stack applications from scratch
+- Developed RESTful APIs serving 100k+ users
+- Integrated third-party services and APIs
+- Participated in agile development cycles
+
+JUNIOR DEVELOPER
+Digital Agency Co. | 2015 - 2017
+---------------------------------
+- Created responsive websites for clients
+- Maintained legacy codebases
+- Collaborated with designers on UI/UX
+
+SKILLS & TECHNOLOGIES
+---------------------
+Frontend: React, TypeScript, JavaScript, HTML/CSS
+Backend: Node.js, Python, Express, PostgreSQL
+Tools: Git, Docker, AWS, Linux
+Other: Agile, TDD, Code Review
+
+EDUCATION
+---------
+BS Computer Science
+State University, 2015`,
 
   'desc-1': `Project 1: E-Commerce Platform
 ==============================
@@ -269,12 +299,12 @@ export default function Desktop() {
     {
       id: 'settings',
       label: 'Settings',
-      icon: '⚙️',
-      submenu: [{ id: 'display', label: 'Display', icon: '🖥️' }],
+      icon: '⚙',
+      submenu: [{ id: 'display', label: 'Display', icon: '🖥' }],
     },
     { id: 'find', label: 'Find', icon: '🔍' },
     { id: 'help', label: 'Help', icon: '❓' },
-    { id: 'run', label: 'Run...', icon: '▶️', separator: true },
+    { id: 'run', label: 'Run...', icon: '▶', separator: true },
     { id: 'shutdown', label: 'Shut Down...', icon: '🔌', separator: true },
   ];
 
@@ -348,7 +378,7 @@ export default function Desktop() {
     openWindow({
       id: `image-${imageId}`,
       title: `${title} - Image Viewer`,
-      icon: '🖼️',
+      icon: '🖼',
       x: 120,
       y: 60,
       width: 500,
@@ -400,7 +430,7 @@ export default function Desktop() {
     openWindow({
       id: 'display-settings',
       title: 'Display Properties',
-      icon: '🖥️',
+      icon: '🖥',
       x: 200,
       y: 100,
       width: 320,
@@ -410,6 +440,24 @@ export default function Desktop() {
       isMinimized: false,
       isMaximized: false,
       component: 'DisplaySettings',
+    });
+  };
+
+  const openExperienceWindow = () => {
+    openWindow({
+      id: 'experience',
+      title: 'Experience - Notepad',
+      icon: '📋',
+      x: 120,
+      y: 60,
+      width: 500,
+      height: 450,
+      minWidth: 300,
+      minHeight: 250,
+      isMinimized: false,
+      isMaximized: false,
+      component: 'Notepad',
+      props: { content: FILE_CONTENTS['experience'], title: 'My Experience' },
     });
   };
 
@@ -424,22 +472,22 @@ export default function Desktop() {
 
     switch (icon.component) {
       case 'MyComputer':
-        openExplorerWindow('my-computer', 'My Computer', '🖥️', MY_COMPUTER_FILES, 'C:\\');
+        openExplorerWindow('my-computer', 'My Computer', '💻', MY_COMPUTER_FILES, 'C:\\');
         break;
       case 'InternetExplorer':
         openIEWindow();
         break;
       case 'RecycleBin':
-        openExplorerWindow('recycle-bin', 'Recycle Bin', '🗑️', RECYCLE_BIN_FILES, 'Recycle Bin');
+        openExplorerWindow('recycle-bin', 'Recycle Bin', '🗑', RECYCLE_BIN_FILES, 'Recycle Bin');
         break;
       case 'Photos':
-        openExplorerWindow('photos', 'Photos', '🖼️', PHOTOS_FILES, 'C:\\Photos');
+        openExplorerWindow('photos', 'Photos', '🖼', PHOTOS_FILES, 'C:\\Photos');
         break;
       case 'Games':
         openExplorerWindow('games', 'Games', '🎮', GAMES_FILES, 'C:\\Games');
         break;
-      case 'Network':
-        openExplorerWindow('network', 'Network', '🌍', NETWORK_FILES, 'Network');
+      case 'Experience':
+        openExperienceWindow();
         break;
       case 'Newsletter':
         setShowNewsletter(true);
@@ -485,8 +533,6 @@ export default function Desktop() {
         setShowNewsletter(true);
       } else {
         const urls: Record<string, string> = {
-          'youtube-url': 'https://youtube.com',
-          'linkedin-url': 'https://linkedin.com',
           'twitter-url': 'https://twitter.com',
         };
         if (urls[file.id]) {
@@ -559,20 +605,25 @@ export default function Desktop() {
       case 'DisplaySettings':
         return <DisplaySettings onClose={() => closeWindow(win.id)} />;
       default:
-        return <div className="p-4">Content not available</div>;
+        return <div style={{ padding: 16 }}>Content not available</div>;
     }
   };
 
   return (
     <div
-      className="fixed inset-0 overflow-hidden select-none"
-      style={getWallpaperStyle(wallpaper)}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        overflow: 'hidden',
+        userSelect: 'none',
+        ...getWallpaperStyle(wallpaper),
+      }}
       onClick={handleDesktopClick}
       onContextMenu={handleDesktopContextMenu}
       data-testid="desktop"
     >
       {/* Desktop Icons */}
-      <div className="absolute top-4 left-4 grid grid-cols-3 gap-4" style={{ gridAutoRows: 'min-content' }}>
+      <div style={{ position: 'absolute', top: 16, left: 16, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, gridAutoRows: 'min-content' }}>
         {DESKTOP_ICONS.map((icon) => (
           <DesktopIcon
             key={icon.id}

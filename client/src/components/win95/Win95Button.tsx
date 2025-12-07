@@ -1,26 +1,37 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react';
-import { cn } from '@/lib/utils';
+import { Button } from 'react95';
+import styled from 'styled-components';
 
 interface Win95ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   pressed?: boolean;
   small?: boolean;
+  primary?: boolean;
+  fullWidth?: boolean;
+  square?: boolean;
 }
 
+const StyledButton = styled(Button)<{ $small?: boolean; $pressed?: boolean }>`
+  font-size: 11px;
+  min-height: ${props => props.$small ? '18px' : '22px'};
+  padding: ${props => props.$small ? '0 4px' : '0 8px'};
+`;
+
 const Win95Button = forwardRef<HTMLButtonElement, Win95ButtonProps>(
-  ({ className, pressed, small, children, ...props }, ref) => {
+  ({ className, pressed, small, primary, fullWidth, square, children, ...props }, ref) => {
     return (
-      <button
+      <StyledButton
         ref={ref}
-        className={cn(
-          'win95-button',
-          pressed && 'win95-button-pressed',
-          small && 'min-w-0 px-1 py-0',
-          className
-        )}
+        active={pressed}
+        primary={primary}
+        fullWidth={fullWidth}
+        square={square}
+        $small={small}
+        $pressed={pressed}
+        className={className}
         {...props}
       >
         {children}
-      </button>
+      </StyledButton>
     );
   }
 );

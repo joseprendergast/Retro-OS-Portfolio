@@ -1,9 +1,102 @@
 import { useState } from 'react';
-import Win95Button from './Win95Button';
+import { Button, Window, WindowHeader, WindowContent, TextInput, Panel } from 'react95';
+import styled from 'styled-components';
 
 interface NewsletterDialogProps {
   onClose: () => void;
 }
+
+const Overlay = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Backdrop = styled.div`
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+`;
+
+const DialogWindow = styled(Window)`
+  position: relative;
+  width: 300px;
+`;
+
+const StyledHeader = styled(WindowHeader)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const CloseButton = styled(Button)`
+  min-width: 20px;
+  width: 20px;
+  height: 18px;
+  padding: 0;
+  font-size: 10px;
+`;
+
+const SuccessContent = styled(WindowContent)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+`;
+
+const IconText = styled.span`
+  font-size: 32px;
+`;
+
+const SuccessMessage = styled.p`
+  font-size: 12px;
+  text-align: center;
+`;
+
+const EmailConfirm = styled.p`
+  font-size: 11px;
+  text-align: center;
+  color: #808080;
+`;
+
+const FormContent = styled(WindowContent)`
+  padding: 16px;
+`;
+
+const IntroText = styled.p`
+  font-size: 11px;
+  margin-bottom: 16px;
+`;
+
+const FormField = styled.div`
+  margin-bottom: 12px;
+`;
+
+const Label = styled.label`
+  font-size: 11px;
+  display: block;
+  margin-bottom: 4px;
+`;
+
+const StyledInput = styled(TextInput)`
+  width: 100%;
+`;
+
+const ErrorText = styled.p`
+  color: #cc0000;
+  font-size: 10px;
+  margin-bottom: 8px;
+`;
+
+const ButtonRow = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+`;
 
 export default function NewsletterDialog({ onClose }: NewsletterDialogProps) {
   const [name, setName] = useState('');
@@ -27,75 +120,62 @@ export default function NewsletterDialog({ onClose }: NewsletterDialogProps) {
 
   if (submitted) {
     return (
-      <div className="fixed inset-0 z-[10000] flex items-center justify-center">
-        <div className="absolute inset-0 bg-black/20" onClick={onClose} />
-        <div className="win95-window relative w-[300px]" data-testid="newsletter-success">
-          <div className="win95-title-active h-[20px] flex items-center justify-between">
-            <span className="text-[11px]">Newsletter</span>
-            <button
-              className="win95-button w-[16px] h-[14px] min-w-0 p-0 flex items-center justify-center text-[10px]"
-              onClick={onClose}
-            >
-              ×
-            </button>
-          </div>
-          <div className="p-4 flex flex-col items-center gap-4">
-            <span className="text-[32px]">✉️</span>
-            <p className="text-[12px] text-center">Thank you for subscribing!</p>
-            <p className="text-[11px] text-center text-[#808080]">You'll receive updates at {email}</p>
-            <Win95Button onClick={onClose} data-testid="button-close-success">OK</Win95Button>
-          </div>
-        </div>
-      </div>
+      <Overlay>
+        <Backdrop onClick={onClose} />
+        <DialogWindow data-testid="newsletter-success">
+          <StyledHeader>
+            <span>Newsletter</span>
+            <CloseButton onClick={onClose}>x</CloseButton>
+          </StyledHeader>
+          <SuccessContent>
+            <IconText>[OK]</IconText>
+            <SuccessMessage>Thank you for subscribing!</SuccessMessage>
+            <EmailConfirm>You'll receive updates at {email}</EmailConfirm>
+            <Button onClick={onClose} data-testid="button-close-success">OK</Button>
+          </SuccessContent>
+        </DialogWindow>
+      </Overlay>
     );
   }
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/20" onClick={onClose} />
-      <div className="win95-window relative w-[300px]" data-testid="newsletter-dialog">
-        <div className="win95-title-active h-[20px] flex items-center justify-between">
-          <span className="text-[11px]">Subscribe to Newsletter</span>
-          <button
-            className="win95-button w-[16px] h-[14px] min-w-0 p-0 flex items-center justify-center text-[10px]"
-            onClick={onClose}
-          >
-            ×
-          </button>
-        </div>
-        <div className="p-4">
-          <p className="text-[11px] mb-4">Get updates about new projects and blog posts!</p>
+    <Overlay>
+      <Backdrop onClick={onClose} />
+      <DialogWindow data-testid="newsletter-dialog">
+        <StyledHeader>
+          <span>Subscribe to Newsletter</span>
+          <CloseButton onClick={onClose}>x</CloseButton>
+        </StyledHeader>
+        <FormContent>
+          <IntroText>Get updates about new projects and blog posts!</IntroText>
 
-          <div className="mb-3">
-            <label className="text-[11px] block mb-1">Name:</label>
-            <input
-              type="text"
-              className="win95-input w-full text-[11px]"
+          <FormField>
+            <Label>Name:</Label>
+            <StyledInput
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
               data-testid="input-newsletter-name"
             />
-          </div>
+          </FormField>
 
-          <div className="mb-3">
-            <label className="text-[11px] block mb-1">Email:</label>
-            <input
+          <FormField>
+            <Label>Email:</Label>
+            <StyledInput
               type="email"
-              className="win95-input w-full text-[11px]"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
               data-testid="input-newsletter-email"
             />
-          </div>
+          </FormField>
 
-          {error && <p className="text-red-600 text-[10px] mb-2">{error}</p>}
+          {error && <ErrorText>{error}</ErrorText>}
 
-          <div className="flex justify-end gap-2">
-            <Win95Button onClick={handleSubmit} data-testid="button-subscribe">Subscribe</Win95Button>
-            <Win95Button onClick={onClose} data-testid="button-cancel">Cancel</Win95Button>
-          </div>
-        </div>
-      </div>
-    </div>
+          <ButtonRow>
+            <Button onClick={handleSubmit} data-testid="button-subscribe">Subscribe</Button>
+            <Button onClick={onClose} data-testid="button-cancel">Cancel</Button>
+          </ButtonRow>
+        </FormContent>
+      </DialogWindow>
+    </Overlay>
   );
 }

@@ -1,8 +1,78 @@
 import { useState, useEffect } from 'react';
-import { cn } from '@/lib/utils';
+import { Button, Toolbar, Panel } from 'react95';
+import styled from 'styled-components';
 import { useWindowManager } from '@/lib/windowManager';
 import { useDesktopStore } from '@/lib/desktopStore';
-import Win95Button from './Win95Button';
+
+const TaskbarContainer = styled(Panel)`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+`;
+
+const StartButton = styled(Button)`
+  font-weight: bold;
+  font-size: 11px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+
+const WindowButton = styled(Button)<{ $isActive?: boolean }>`
+  height: 22px;
+  min-width: 100px;
+  max-width: 150px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const WindowButtonsContainer = styled.div`
+  flex: 1;
+  display: flex;
+  gap: 4px;
+  overflow: hidden;
+  margin-left: 4px;
+`;
+
+const SystemTray = styled(Panel)`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 8px;
+  height: 22px;
+  margin-left: 4px;
+`;
+
+const Divider = styled.div`
+  width: 2px;
+  height: 22px;
+  margin: 0 4px;
+  background: #808080;
+  box-shadow: 1px 0 0 #ffffff;
+`;
+
+const ClockText = styled.span`
+  font-size: 11px;
+  min-width: 60px;
+  text-align: center;
+`;
+
+const IconSpan = styled.span`
+  font-size: 14px;
+`;
 
 export default function Taskbar() {
   const { windows, activeWindowId, focusWindow, minimizeWindow, restoreWindow } = useWindowManager();
@@ -36,54 +106,46 @@ export default function Taskbar() {
   };
 
   return (
-    <div
-      className="fixed bottom-0 left-0 right-0 h-[30px] bg-[#c0c0c0] win95-raised flex items-center px-1 z-[9999]"
+    <TaskbarContainer
+      variant="raised"
       data-testid="taskbar"
-      onClick={(e) => e.stopPropagation()}
+      onClick={(e: React.MouseEvent) => e.stopPropagation()}
     >
-      {/* Start Button */}
-      <Win95Button
-        pressed={startMenuOpen}
-        onClick={(e) => {
+      <StartButton
+        active={startMenuOpen}
+        onClick={(e: React.MouseEvent) => {
           e.stopPropagation();
           toggleStartMenu();
         }}
-        className="flex items-center gap-1 font-bold h-[22px]"
         data-testid="button-start"
       >
-        <span className="text-[14px]">🪟</span>
+        <IconSpan>🪟</IconSpan>
         <span>Start</span>
-      </Win95Button>
+      </StartButton>
 
-      {/* Divider */}
-      <div className="w-[2px] h-[22px] mx-1 bg-[#808080] shadow-[1px_0_0_#ffffff]" />
+      <Divider />
 
-      {/* Window Buttons */}
-      <div className="flex-1 flex gap-1 overflow-hidden">
+      <WindowButtonsContainer>
         {windows.map((win) => (
-          <button
+          <WindowButton
             key={win.id}
+            active={activeWindowId === win.id && !win.isMinimized}
             onClick={() => handleWindowButtonClick(win.id)}
-            className={cn(
-              'win95-button h-[22px] min-w-[100px] max-w-[150px] px-2 flex items-center gap-1 truncate text-left',
-              activeWindowId === win.id && !win.isMinimized && 'win95-button-pressed'
-            )}
             data-testid={`taskbar-button-${win.id}`}
           >
-            <span className="text-[12px]">{win.icon}</span>
-            <span className="truncate text-[11px]">{win.title}</span>
-          </button>
+            <IconSpan style={{ fontSize: '12px' }}>{win.icon}</IconSpan>
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{win.title}</span>
+          </WindowButton>
         ))}
-      </div>
+      </WindowButtonsContainer>
 
-      {/* System Tray */}
-      <div className="win95-sunken flex items-center gap-2 px-2 h-[22px] ml-1">
-        <span className="text-[14px]" title="Volume">🔊</span>
-        <span className="text-[14px]" title="Network">🖧</span>
-        <span className="text-[11px] min-w-[60px] text-center" data-testid="text-clock">
+      <SystemTray variant="well">
+        <IconSpan title="Volume">🔊</IconSpan>
+        <IconSpan title="Network">🖧</IconSpan>
+        <ClockText data-testid="text-clock">
           {formatTime(time)}
-        </span>
-      </div>
-    </div>
+        </ClockText>
+      </SystemTray>
+    </TaskbarContainer>
   );
 }

@@ -1,4 +1,5 @@
-import Win95Button from './Win95Button';
+import { Button, Window, WindowHeader, WindowContent } from 'react95';
+import styled from 'styled-components';
 
 interface Win95DialogProps {
   title: string;
@@ -8,51 +9,102 @@ interface Win95DialogProps {
   onClose: () => void;
 }
 
+const Overlay = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Backdrop = styled.div`
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+`;
+
+const DialogWindow = styled(Window)`
+  position: relative;
+  min-width: 300px;
+  max-width: 400px;
+`;
+
+const StyledHeader = styled(WindowHeader)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const CloseButton = styled(Button)`
+  min-width: 20px;
+  width: 20px;
+  height: 18px;
+  padding: 0;
+  font-size: 10px;
+`;
+
+const ContentArea = styled.div`
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+`;
+
+const IconText = styled.span`
+  font-size: 32px;
+`;
+
+const MessageText = styled.p`
+  font-size: 11px;
+  flex: 1;
+`;
+
+const ButtonRow = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px 16px;
+`;
+
 export default function Win95Dialog({
   title,
-  icon = '❓',
+  icon = '?',
   message,
   buttons = [{ label: 'OK', action: () => {}, primary: true }],
   onClose,
 }: Win95DialogProps) {
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/20" onClick={onClose} />
-      <div className="win95-window relative min-w-[300px] max-w-[400px]" data-testid="dialog">
-        {/* Title Bar */}
-        <div className="win95-title-active h-[20px] flex items-center justify-between">
-          <span className="text-[11px] truncate">{title}</span>
-          <button
-            className="win95-button w-[16px] h-[14px] min-w-0 p-0 flex items-center justify-center text-[10px]"
-            onClick={onClose}
-            data-testid="button-dialog-close"
-          >
-            ×
-          </button>
-        </div>
+    <Overlay>
+      <Backdrop onClick={onClose} />
+      <DialogWindow data-testid="dialog">
+        <StyledHeader>
+          <span>{title}</span>
+          <CloseButton onClick={onClose} data-testid="button-dialog-close">
+            x
+          </CloseButton>
+        </StyledHeader>
+        <WindowContent>
+          <ContentArea>
+            <IconText>{icon}</IconText>
+            <MessageText>{message}</MessageText>
+          </ContentArea>
 
-        {/* Content */}
-        <div className="p-4 flex gap-4">
-          <span className="text-[32px]">{icon}</span>
-          <p className="text-[11px] flex-1">{message}</p>
-        </div>
-
-        {/* Buttons */}
-        <div className="flex justify-center gap-2 p-3 pt-0">
-          {buttons.map((btn, i) => (
-            <Win95Button
-              key={i}
-              onClick={() => {
-                btn.action();
-                onClose();
-              }}
-              data-testid={`button-dialog-${btn.label.toLowerCase()}`}
-            >
-              {btn.label}
-            </Win95Button>
-          ))}
-        </div>
-      </div>
-    </div>
+          <ButtonRow>
+            {buttons.map((btn, i) => (
+              <Button
+                key={i}
+                onClick={() => {
+                  btn.action();
+                  onClose();
+                }}
+                data-testid={`button-dialog-${btn.label.toLowerCase()}`}
+              >
+                {btn.label}
+              </Button>
+            ))}
+          </ButtonRow>
+        </WindowContent>
+      </DialogWindow>
+    </Overlay>
   );
 }

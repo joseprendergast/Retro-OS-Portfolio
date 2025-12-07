@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { TextInput, Panel } from 'react95';
+import styled from 'styled-components';
 
 interface NotepadProps {
   initialContent?: string;
@@ -6,22 +8,48 @@ interface NotepadProps {
   readOnly?: boolean;
 }
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+`;
+
+const TextArea = styled.textarea`
+  flex: 1;
+  width: 100%;
+  padding: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  resize: none;
+  border: none;
+  outline: none;
+  background: white;
+`;
+
+const StatusBar = styled(Panel)`
+  height: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 10px;
+`;
+
 export default function Notepad({ initialContent = '', title = 'Untitled', readOnly = false }: NotepadProps) {
   const [content, setContent] = useState(initialContent);
 
   return (
-    <div className="flex flex-col h-full bg-white" data-testid="notepad">
-      <textarea
-        className="flex-1 w-full p-2 font-mono text-[12px] resize-none border-0 focus:outline-none bg-white"
+    <Container data-testid="notepad">
+      <TextArea
         value={content}
         onChange={(e) => setContent(e.target.value)}
         readOnly={readOnly}
         placeholder="Start typing..."
         data-testid="input-notepad-content"
       />
-      <div className="h-[20px] win95-sunken flex items-center px-2 text-[10px] bg-[#c0c0c0]">
+      <StatusBar variant="well">
         {readOnly ? 'Read Only' : `${content.length} characters`}
-      </div>
-    </div>
+      </StatusBar>
+    </Container>
   );
 }

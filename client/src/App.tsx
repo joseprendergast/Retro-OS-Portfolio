@@ -1,27 +1,44 @@
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import Desktop from "@/components/win95/Desktop";
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { styleReset } from 'react95';
 import original from 'react95/dist/themes/original';
+import ms_sans_serif from 'react95/dist/fonts/ms_sans_serif.woff2';
+import ms_sans_serif_bold from 'react95/dist/fonts/ms_sans_serif_bold.woff2';
+import Desktop from "@/components/win95/Desktop";
 
 const GlobalStyles = createGlobalStyle`
   ${styleReset}
+  @font-face {
+    font-family: 'ms_sans_serif';
+    src: url('${ms_sans_serif}') format('woff2');
+    font-weight: 400;
+    font-style: normal
+  }
+  @font-face {
+    font-family: 'ms_sans_serif';
+    src: url('${ms_sans_serif_bold}') format('woff2');
+    font-weight: bold;
+    font-style: normal
+  }
+  body, input, select, textarea {
+    font-family: 'ms_sans_serif';
+  }
+  * {
+    box-sizing: border-box;
+  }
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
 `;
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={original}>
-        <GlobalStyles />
-        <TooltipProvider>
-          <Toaster />
-          <Desktop />
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ThemeProvider theme={original}>
+      <GlobalStyles />
+      <Desktop />
+    </ThemeProvider>
   );
 }
 
