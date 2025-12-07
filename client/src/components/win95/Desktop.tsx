@@ -50,8 +50,13 @@ const DESKTOP_ICONS: DesktopIconData[] = [
   { id: 'my-computer', label: 'My Computer', icon: <Computer variant="32x32_4" />, component: 'MyComputer' },
   { id: 'internet-explorer', label: 'Internet Explorer', icon: <Explorer100 variant="32x32_4" />, component: 'InternetExplorer' },
   { id: 'recycle-bin', label: 'Recycle Bin', icon: <RecycleFull variant="32x32_4" />, component: 'RecycleBin' },
-  { id: 'games', label: 'Games', icon: <Joy102 variant="32x32_4" />, component: 'Games' },
   { id: 'experience', label: 'Experience', icon: <Notepad2 variant="32x32_4" />, component: 'Experience' },
+  { id: 'solitaire', label: 'Solitaire', icon: <Freecell1 variant="32x32_4" />, component: 'Solitaire' },
+  { id: 'minesweeper', label: 'Minesweeper', icon: <Winmine1 variant="32x32_4" />, component: 'Minesweeper' },
+  { id: 'starcraft', label: 'Starcraft', icon: <img src={starcraftIcon} alt="Starcraft" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
+  { id: 'red-alert', label: 'Red Alert 2', icon: <Joy102 variant="32x32_4" />, component: 'GameImage' },
+  { id: 'sims', label: 'The Sims', icon: <Joy102 variant="32x32_4" />, component: 'GameImage' },
+  { id: 'age-of-empires', label: 'Age of Empires', icon: <Joy102 variant="32x32_4" />, component: 'GameImage' },
   { id: 'newsletter', label: 'Substack', icon: <Mail variant="32x32_4" />, isShortcut: true, url: 'https://joseprendergast.substack.com/' },
   { id: 'twitter', label: 'Twitter', icon: <Globe variant="32x32_4" />, isShortcut: true, url: 'https://twitter.com' },
 ];
@@ -509,11 +514,17 @@ export default function Desktop() {
       case 'RecycleBin':
         openExplorerWindow('recycle-bin', 'Recycle Bin', '🗑', RECYCLE_BIN_FILES, 'Recycle Bin');
         break;
-      case 'Games':
-        openExplorerWindow('games', 'Games', '🎮', GAMES_FILES, 'C:\\Games');
-        break;
       case 'Experience':
         openExperienceWindow();
+        break;
+      case 'Solitaire':
+        openGameWindow('solitaire', 'Solitaire', '🃏');
+        break;
+      case 'Minesweeper':
+        openGameWindow('minesweeper', 'Minesweeper', '💣');
+        break;
+      case 'GameImage':
+        openGameImageWindow(iconId, icon.label);
         break;
     }
   };
