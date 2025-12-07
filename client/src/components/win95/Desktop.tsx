@@ -38,7 +38,7 @@ import simsImage from '@assets/sims_1765116863385.jpeg';
 import simsIcon from '@assets/image_1765118121238.png';
 import ageOfEmpiresImage from '@assets/ages_of_empire_1765116863384.png';
 import ageOfEmpiresIcon from '@assets/image_1765118009278.png';
-import diabloIcon from '@assets/image_1765118438635.png';
+import diabloIcon from '@assets/image_1765118928021.png';
 import diabloImage from '@assets/image_1765118507784.png';
 import diablo2Icon from '@assets/image_1765118662569.png';
 import diablo2Image from '@assets/image_1765118693762.png';
