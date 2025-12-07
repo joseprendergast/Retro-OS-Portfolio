@@ -38,6 +38,8 @@ import simsImage from '@assets/sims_1765116863385.jpeg';
 import simsIcon from '@assets/image_1765118121238.png';
 import ageOfEmpiresImage from '@assets/ages_of_empire_1765116863384.png';
 import ageOfEmpiresIcon from '@assets/image_1765118009278.png';
+import diabloIcon from '@assets/image_1765118438635.png';
+import diabloImage from '@assets/image_1765118507784.png';
 
 interface DesktopIconData {
   id: string;
@@ -59,6 +61,7 @@ const DESKTOP_ICONS: DesktopIconData[] = [
   { id: 'red-alert', label: 'Red Alert 2', icon: <Joy102 variant="32x32_4" />, component: 'GameImage' },
   { id: 'sims', label: 'The Sims', icon: <img src={simsIcon} alt="The Sims" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'age-of-empires', label: 'Age of Empires', icon: <img src={ageOfEmpiresIcon} alt="Age of Empires" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
+  { id: 'diablo', label: 'Diablo', icon: <img src={diabloIcon} alt="Diablo" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'newsletter', label: 'Substack', icon: <Mail variant="32x32_4" />, isShortcut: true, url: 'https://joseprendergast.substack.com/' },
   { id: 'twitter', label: 'Twitter', icon: <Globe variant="32x32_4" />, isShortcut: true, url: 'https://twitter.com' },
 ];
@@ -110,6 +113,7 @@ const GAME_IMAGES: Record<string, string> = {
   'red-alert': redAlertImage,
   'sims': simsImage,
   'age-of-empires': ageOfEmpiresImage,
+  'diablo': diabloImage,
 };
 
 const FILE_CONTENTS: Record<string, string> = {
