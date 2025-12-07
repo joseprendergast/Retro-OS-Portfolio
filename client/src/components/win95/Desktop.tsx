@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useWindowManager } from '@/lib/windowManager';
 import { useDesktopStore, WallpaperType } from '@/lib/desktopStore';
 import DesktopIcon from './DesktopIcon';
@@ -14,7 +14,6 @@ import InternetExplorer from './InternetExplorer';
 import ImageViewer from './ImageViewer';
 import DisplaySettings from './DisplaySettings';
 import NewsletterDialog from './NewsletterDialog';
-import { useState } from 'react';
 
 import cloudsWallpaper from '@assets/stock_images/windows_95_blue_sky__82d519de.jpg';
 import crtImage from '@assets/generated_images/90s_crt_computer_setup.png';
