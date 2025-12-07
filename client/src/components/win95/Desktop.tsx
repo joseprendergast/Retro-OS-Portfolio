@@ -35,7 +35,9 @@ import starcraftImage from '@assets/starcraft_1765116863386.jpg';
 import starcraftIcon from '@assets/1_1765116863380.ico';
 import redAlertImage from '@assets/redalert_2_1765116863385.jpg';
 import simsImage from '@assets/sims_1765116863385.jpeg';
+import simsIcon from '@assets/image_1765118121238.png';
 import ageOfEmpiresImage from '@assets/ages_of_empire_1765116863384.png';
+import ageOfEmpiresIcon from '@assets/image_1765118009278.png';
 
 interface DesktopIconData {
   id: string;
@@ -55,8 +57,8 @@ const DESKTOP_ICONS: DesktopIconData[] = [
   { id: 'minesweeper', label: 'Minesweeper', icon: <Winmine1 variant="32x32_4" />, component: 'Minesweeper' },
   { id: 'starcraft', label: 'Starcraft', icon: <img src={starcraftIcon} alt="Starcraft" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'red-alert', label: 'Red Alert 2', icon: <Joy102 variant="32x32_4" />, component: 'GameImage' },
-  { id: 'sims', label: 'The Sims', icon: <Joy102 variant="32x32_4" />, component: 'GameImage' },
-  { id: 'age-of-empires', label: 'Age of Empires', icon: <Joy102 variant="32x32_4" />, component: 'GameImage' },
+  { id: 'sims', label: 'The Sims', icon: <img src={simsIcon} alt="The Sims" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
+  { id: 'age-of-empires', label: 'Age of Empires', icon: <img src={ageOfEmpiresIcon} alt="Age of Empires" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'newsletter', label: 'Substack', icon: <Mail variant="32x32_4" />, isShortcut: true, url: 'https://joseprendergast.substack.com/' },
   { id: 'twitter', label: 'Twitter', icon: <Globe variant="32x32_4" />, isShortcut: true, url: 'https://twitter.com' },
 ];
