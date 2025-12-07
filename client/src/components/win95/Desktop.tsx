@@ -13,6 +13,7 @@ import Solitaire from './Solitaire';
 import InternetExplorer from './InternetExplorer';
 import ImageViewer from './ImageViewer';
 import DisplaySettings from './DisplaySettings';
+import StarcraftGame from './StarcraftGame';
 
 import {
   Computer,
@@ -66,7 +67,7 @@ const DESKTOP_ICONS: DesktopIconData[] = [
   { id: 'diablo', label: 'Diablo', icon: <img src={diabloIcon} alt="Diablo" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'diablo2', label: 'Diablo 2', icon: <img src={diablo2Icon} alt="Diablo 2" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'newsletter', label: 'Substack', icon: <Mail variant="32x32_4" />, isShortcut: true, url: 'https://joseprendergast.substack.com/' },
-  { id: 'starcraft', label: 'Starcraft', icon: <img src={starcraftIcon} alt="Starcraft" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
+  { id: 'starcraft', label: 'Starcraft', icon: <img src={starcraftIcon} alt="Starcraft" style={{ width: 32, height: 32 }} />, component: 'StarcraftGame' },
 ];
 
 const MY_COMPUTER_FILES: FileItem[] = [
@@ -536,6 +537,22 @@ export default function Desktop() {
       case 'GameImage':
         openGameImageWindow(iconId, icon.label);
         break;
+      case 'StarcraftGame':
+        openWindow({
+          id: 'starcraft-game',
+          title: 'Starcraft 64',
+          icon: '🎮',
+          x: 50,
+          y: 30,
+          width: 800,
+          height: 600,
+          minWidth: 640,
+          minHeight: 480,
+          isMinimized: false,
+          isMaximized: false,
+          component: 'StarcraftGame',
+        });
+        break;
     }
   };
 
@@ -642,6 +659,8 @@ export default function Desktop() {
         return <ImageViewer src={imageProps.src} title={imageProps.title} />;
       case 'DisplaySettings':
         return <DisplaySettings onClose={() => closeWindow(win.id)} />;
+      case 'StarcraftGame':
+        return <StarcraftGame />;
       default:
         return <div style={{ padding: 16 }}>Content not available</div>;
     }
