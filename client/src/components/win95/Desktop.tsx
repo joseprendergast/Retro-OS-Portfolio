@@ -13,7 +13,6 @@ import Solitaire from './Solitaire';
 import InternetExplorer from './InternetExplorer';
 import ImageViewer from './ImageViewer';
 import DisplaySettings from './DisplaySettings';
-import NewsletterDialog from './NewsletterDialog';
 
 import {
   Computer,
@@ -31,12 +30,6 @@ import {
   Shell3233,
 } from '@react95/icons';
 
-import cloudsWallpaper from '@assets/stock_images/windows_95_blue_sky__82d519de.jpg';
-import crtImage from '@assets/generated_images/90s_crt_computer_setup.png';
-import floppyImage from '@assets/generated_images/colorful_floppy_disks_stack.png';
-import cdromImage from '@assets/generated_images/cd-rom_collection_scattered.png';
-import modemImage from '@assets/generated_images/dial-up_modem_device.png';
-import pixelArtImage from '@assets/generated_images/retro_pixel_art_scene.png';
 
 import starcraftImage from '@assets/stock_images/starcraft_video_game_faa55a3d.jpg';
 import redAlertImage from '@assets/stock_images/red_alert_military_t_ed9e3e3c.jpg';
@@ -57,10 +50,9 @@ const DESKTOP_ICONS: DesktopIconData[] = [
   { id: 'my-computer', label: 'My Computer', icon: <Computer variant="32x32_4" />, component: 'MyComputer' },
   { id: 'internet-explorer', label: 'Internet Explorer', icon: <Explorer100 variant="32x32_4" />, component: 'InternetExplorer' },
   { id: 'recycle-bin', label: 'Recycle Bin', icon: <RecycleFull variant="32x32_4" />, component: 'RecycleBin' },
-  { id: 'photos', label: 'Photos', icon: <FolderOpen variant="32x32_4" />, component: 'Photos' },
   { id: 'games', label: 'Games', icon: <Joy102 variant="32x32_4" />, component: 'Games' },
   { id: 'experience', label: 'Experience', icon: <Notepad2 variant="32x32_4" />, component: 'Experience' },
-  { id: 'newsletter', label: 'Newsletter', icon: <Mail variant="32x32_4" />, isShortcut: true, component: 'Newsletter' },
+  { id: 'newsletter', label: 'Substack', icon: <Mail variant="32x32_4" />, isShortcut: true, url: 'https://joseprendergast.substack.com/' },
   { id: 'twitter', label: 'Twitter', icon: <Globe variant="32x32_4" />, isShortcut: true, url: 'https://twitter.com' },
 ];
 
@@ -90,13 +82,6 @@ const MY_COMPUTER_FILES: FileItem[] = [
   { id: 'my-music', name: 'My Music', icon: <Mmsys101 variant="32x32_4" />, type: 'folder', children: [] },
 ];
 
-const PHOTOS_FILES: FileItem[] = [
-  { id: 'crt', name: 'CRT_Computer.png', icon: <Shell3233 variant="32x32_4" />, type: 'file' },
-  { id: 'floppy', name: 'Floppy_Disks.png', icon: <Shell3233 variant="32x32_4" />, type: 'file' },
-  { id: 'cdrom', name: 'CD_Collection.png', icon: <Shell3233 variant="32x32_4" />, type: 'file' },
-  { id: 'modem', name: 'Dial_Up_Modem.png', icon: <Shell3233 variant="32x32_4" />, type: 'file' },
-  { id: 'pixel', name: 'Pixel_Art.png', icon: <Shell3233 variant="32x32_4" />, type: 'file' },
-];
 
 const RECYCLE_BIN_FILES: FileItem[] = [
   { id: 'old-resume', name: 'old_resume_draft.doc', icon: <Notepad2 variant="32x32_4" />, type: 'file' },
@@ -168,44 +153,90 @@ all the easter eggs hidden throughout!
 
 Thanks for visiting!`,
 
-  'experience': `MY PROFESSIONAL EXPERIENCE
-===========================
+  'experience': `+=====================================================+
+|     JOSE PRENDERGAST - PROFESSIONAL EXPERIENCE     |
++=====================================================+
 
-SENIOR SOFTWARE DEVELOPER
-Tech Company Inc. | 2020 - Present
----------------------------------
-- Lead development of enterprise web applications
-- Architect scalable solutions using React and Node.js
-- Mentor team of 5 junior developers
-- Reduced load times by 40% through optimization
-- Implemented CI/CD pipelines
+ ___________________________________________________
+|                                                   |
+| SVP, Product Management                           |
+| AlixPartners                                      |
+| Nov 2024 - Present                                |
+|___________________________________________________|
 
-SOFTWARE DEVELOPER
-Startup Innovation Labs | 2017 - 2020
---------------------------------------
-- Built full-stack applications from scratch
-- Developed RESTful APIs serving 100k+ users
-- Integrated third-party services and APIs
-- Participated in agile development cycles
+ ___________________________________________________
+|                                                   |
+| Community Member                                  |
+| Everything Marketplaces                           |
+| 2023 - Present                                    |
+|___________________________________________________|
 
-JUNIOR DEVELOPER
-Digital Agency Co. | 2015 - 2017
----------------------------------
-- Created responsive websites for clients
-- Maintained legacy codebases
-- Collaborated with designers on UI/UX
+ ___________________________________________________
+|                                                   |
+| Product Advisor                                   |
+| PlateRate                                         |
+| Jul 2024 - Nov 2024                               |
+|___________________________________________________|
 
-SKILLS & TECHNOLOGIES
----------------------
-Frontend: React, TypeScript, JavaScript, HTML/CSS
-Backend: Node.js, Python, Express, PostgreSQL
-Tools: Git, Docker, AWS, Linux
-Other: Agile, TDD, Code Review
+ ___________________________________________________
+|                                                   |
+| Product Advisor / Fractional CPO                  |
+| Qviro.com                                         |
+| May 2024 - Nov 2024                               |
+|___________________________________________________|
 
-EDUCATION
----------
-BS Computer Science
-State University, 2015`,
+ ___________________________________________________
+|                                                   |
+| Director of Product Management                    |
+| Dot Foods                                         |
+| Jan 2022 - Jun 2024                               |
+|___________________________________________________|
+
+ ___________________________________________________
+|                                                   |
+| IT Sr. Portfolio Manager                          |
+| Santander US                                      |
+| Oct 2020 - Jan 2022                               |
+|___________________________________________________|
+
+ ___________________________________________________
+|                                                   |
+| Group Product Manager                             |
+| SNGULAR                                           |
+| Mar 2020 - Jan 2022                               |
+|___________________________________________________|
+
+ ___________________________________________________
+|                                                   |
+| Lead Product Manager                              |
+| Orange                                            |
+| Jan 2018 - Mar 2020                               |
+|___________________________________________________|
+
+ ___________________________________________________
+|                                                   |
+| Senior Product Manager                            |
+| NEC Corporation                                   |
+| May 2015 - Jan 2018                               |
+|___________________________________________________|
+
+ ___________________________________________________
+|                                                   |
+| Global Product Manager                            |
+| Telefonica                                        |
+| Jan 2014 - May 2015                               |
+|___________________________________________________|
+
+ ___________________________________________________
+|                                                   |
+| Sr. Solutions Consultant                          |
+| Telefonica                                        |
+| Dec 2011 - Jan 2014                               |
+|___________________________________________________|
+
++=====================================================+
+|           Press any key to continue...             |
++=====================================================+`,
 
   'desc-1': `Project 1: E-Commerce Platform
 ==============================
@@ -247,13 +278,6 @@ Features:
 Technologies: React, OpenWeather API, Charts.js`,
 };
 
-const IMAGE_SOURCES: Record<string, string> = {
-  'crt': crtImage,
-  'floppy': floppyImage,
-  'cdrom': cdromImage,
-  'modem': modemImage,
-  'pixel': pixelArtImage,
-};
 
 export default function Desktop() {
   const { windows, openWindow, closeWindow } = useWindowManager();
@@ -265,7 +289,6 @@ export default function Desktop() {
     closeContextMenu,
   } = useDesktopStore();
 
-  const [showNewsletter, setShowNewsletter] = useState(false);
   const [navigationHistory, setNavigationHistory] = useState<Map<string, { path: string; items: FileItem[] }[]>>(new Map());
 
   const getWallpaperStyle = (wp: WallpaperType): React.CSSProperties => {
@@ -399,23 +422,6 @@ export default function Desktop() {
     });
   };
 
-  const openImageWindow = (imageId: string, title: string) => {
-    openWindow({
-      id: `image-${imageId}`,
-      title: `${title} - Image Viewer`,
-      icon: '🖼',
-      x: 120,
-      y: 60,
-      width: 500,
-      height: 400,
-      minWidth: 250,
-      minHeight: 200,
-      isMinimized: false,
-      isMaximized: false,
-      component: 'ImageViewer',
-      props: { src: IMAGE_SOURCES[imageId], title },
-    });
-  };
 
   const openGameWindow = (game: 'solitaire' | 'minesweeper', title: string, icon: string) => {
     openWindow({
@@ -505,17 +511,11 @@ export default function Desktop() {
       case 'RecycleBin':
         openExplorerWindow('recycle-bin', 'Recycle Bin', '🗑', RECYCLE_BIN_FILES, 'Recycle Bin');
         break;
-      case 'Photos':
-        openExplorerWindow('photos', 'Photos', '🖼', PHOTOS_FILES, 'C:\\Photos');
-        break;
       case 'Games':
         openExplorerWindow('games', 'Games', '🎮', GAMES_FILES, 'C:\\Games');
         break;
       case 'Experience':
         openExperienceWindow();
-        break;
-      case 'Newsletter':
-        setShowNewsletter(true);
         break;
     }
   };
@@ -542,9 +542,7 @@ export default function Desktop() {
 
   const handleFileOpen = (file: FileItem, windowId: string) => {
     if (file.type === 'file') {
-      if (file.id.startsWith('crt') || file.id.startsWith('floppy') || file.id.startsWith('cdrom') || file.id.startsWith('modem') || file.id.startsWith('pixel')) {
-        openImageWindow(file.id, file.name);
-      } else if (file.id === 'solitaire') {
+      if (file.id === 'solitaire') {
         openGameWindow('solitaire', 'Solitaire', '🃏');
       } else if (file.id === 'minesweeper') {
         openGameWindow('minesweeper', 'Minesweeper', '💣');
@@ -554,15 +552,11 @@ export default function Desktop() {
         openNotepadWindow(file.id, file.name);
       }
     } else if (file.type === 'shortcut') {
-      if (file.id === 'newsletter-url') {
-        setShowNewsletter(true);
-      } else {
-        const urls: Record<string, string> = {
-          'twitter-url': 'https://twitter.com',
-        };
-        if (urls[file.id]) {
-          window.open(urls[file.id], '_blank');
-        }
+      const urls: Record<string, string> = {
+        'twitter-url': 'https://twitter.com',
+      };
+      if (urls[file.id]) {
+        window.open(urls[file.id], '_blank');
       }
     }
   };
@@ -684,9 +678,6 @@ export default function Desktop() {
 
       {/* Taskbar */}
       <Taskbar />
-
-      {/* Newsletter Dialog */}
-      {showNewsletter && <NewsletterDialog onClose={() => setShowNewsletter(false)} />}
     </div>
   );
 }
