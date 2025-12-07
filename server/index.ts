@@ -3,6 +3,27 @@ import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
 
+// Handle uncaught exceptions and rejections
+process.on('uncaughtException', (error) => {
+  console.error('[FATAL] Uncaught Exception:', error);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('[FATAL] Unhandled Rejection at:', promise, 'reason:', reason);
+  process.exit(1);
+});
+
+process.on('SIGTERM', () => {
+  console.log('[INFO] SIGTERM received, shutting down gracefully');
+  process.exit(0);
+});
+
+process.on('SIGINT', () => {
+  console.log('[INFO] SIGINT received, shutting down gracefully');
+  process.exit(0);
+});
+
 const app = express();
 const httpServer = createServer(app);
 
@@ -102,6 +123,10 @@ app.use((req, res, next) => {
       () => {
         log(`serving on port ${port}`);
         log(`Server successfully started in ${process.env.NODE_ENV || "development"} mode`);
+        
+        // Explicit stdout logging for deployment health checks
+        console.log(`[READY] Server is listening on http://0.0.0.0:${port}`);
+        console.log(`[READY] Application started successfully`);
       },
     );
 
