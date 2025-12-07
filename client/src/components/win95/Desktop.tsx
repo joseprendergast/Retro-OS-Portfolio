@@ -246,7 +246,7 @@ export default function Desktop() {
   const getWallpaperStyle = (wp: WallpaperType): React.CSSProperties => {
     switch (wp) {
       case 'clouds':
-        return { backgroundImage: `url(${cloudsWallpaper})`, backgroundSize: 'cover', backgroundPosition: 'center' };
+        return { backgroundImage: `url(https://i.pinimg.com/736x/c4/69/91/c46991139f26d28914a533ecb3c2f23f.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center' };
       case 'geometric':
         return { background: 'repeating-linear-gradient(45deg, #008080, #008080 10px, #006666 10px, #006666 20px)' };
       case 'brick':
