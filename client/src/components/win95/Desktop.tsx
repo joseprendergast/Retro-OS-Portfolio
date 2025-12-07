@@ -60,14 +60,13 @@ const DESKTOP_ICONS: DesktopIconData[] = [
   { id: 'experience', label: 'Experience', icon: <Notepad2 variant="32x32_4" />, component: 'Experience' },
   { id: 'solitaire', label: 'Solitaire', icon: <Freecell1 variant="32x32_4" />, component: 'Solitaire' },
   { id: 'minesweeper', label: 'Minesweeper', icon: <Winmine1 variant="32x32_4" />, component: 'Minesweeper' },
-  { id: 'starcraft', label: 'Starcraft', icon: <img src={starcraftIcon} alt="Starcraft" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'red-alert', label: 'Red Alert 2', icon: <img src={redAlertIcon} alt="Red Alert 2" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'sims', label: 'The Sims', icon: <img src={simsIcon} alt="The Sims" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'age-of-empires', label: 'Age of Empires', icon: <img src={ageOfEmpiresIcon} alt="Age of Empires" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'diablo', label: 'Diablo', icon: <img src={diabloIcon} alt="Diablo" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'diablo2', label: 'Diablo 2', icon: <img src={diablo2Icon} alt="Diablo 2" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
   { id: 'newsletter', label: 'Substack', icon: <Mail variant="32x32_4" />, isShortcut: true, url: 'https://joseprendergast.substack.com/' },
-  { id: 'twitter', label: 'Twitter', icon: <Globe variant="32x32_4" />, isShortcut: true, url: 'https://twitter.com' },
+  { id: 'starcraft', label: 'Starcraft', icon: <img src={starcraftIcon} alt="Starcraft" style={{ width: 32, height: 32 }} />, component: 'GameImage' },
 ];
 
 const MY_COMPUTER_FILES: FileItem[] = [
